@@ -6,13 +6,23 @@ const fs = require('fs');
 
 const utils = require('./lib/utils.js')
 
-app.get('/list', (req, res) => {
-  fs.readFile('./data/shop-list.json', (error, data) => {
-    res.send(data.toString())
-  })
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+})
+let shopList = {};
+fs.readFile('./data/shop-list.json', (error, data) => {
+  shopList = {
+    list: JSON.parse(data.toString())
+  }
 })
 
-fs.readFile('./data/shop-item.json', (error, data) => {
+app.get('/api/list', (req, res) => {
+  // 暂时先已读取的形式
+  res.send(shopList)
+})
+
+/* fs.readFile('./data/shop-item.json', (error, data) => {
   let data2 = JSON.parse(data.toString());
   let json = {};
   data2.map((item) => {
@@ -20,7 +30,7 @@ fs.readFile('./data/shop-item.json', (error, data) => {
       json[item.data.id] = item
     }
   })
-})
+}) */
 
 app.get('/item', (req, res) => {
   let {id} = req.query;
