@@ -13,7 +13,6 @@
 				</div>
 				<div class="gray-box">
 					<div class="item-box">
-
             <shop-item
               v-for="item,index in shopList"
               :key='index'

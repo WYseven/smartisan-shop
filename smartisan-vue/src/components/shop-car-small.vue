@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     carShowHandle () {
-      console.log(123)
       this.carShow = true
     }
   }

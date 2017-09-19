@@ -21,7 +21,7 @@
         <span class="item-gray-btn">
           <a href="javascript:;" target="_blank">查看详情</a>
         </span>
-        <span class="item-blue-btn">加入购物车 </span>
+        <span class="item-blue-btn" @click="addShopCarHandle">加入购物车 </span>
       </div>
       <div class="item-btns clearfix" v-if='!sItem.direct_to_cart'>
         <span class="item-gray-btn"><a href="#/item/100023902" target="_blank">查看详情</a> </span>
@@ -62,6 +62,11 @@ export default {
           image: item.spec_json[0].image
         }
       })
+    }
+  },
+  methods: {
+    addShopCarHandle () {
+      this.$store.dispatch('setShopCarAsync')
     }
   }
 }

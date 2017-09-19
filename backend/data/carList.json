@@ -1,0 +1,19 @@
+{
+  carList: [
+    {
+      "id": '',
+      "name": '',
+      "ali_image": '',
+      "spec_json" : [
+        {
+          "show_name": "灰色"
+        },
+        {
+          "show_name": "3.5 mm",
+        }
+      ],
+      price: '100',
+      num: 3
+    }
+  ]
+}

@@ -6,11 +6,11 @@ Vue.use(Vuex)
 
 let store = new Vuex.Store({
   state: {
-    shopList: {}
+    shopList: {},  // 商品列表
+    shopCarList: [] // 小购物车列表
   },
   mutations: {
     changeShopListValue (state, payload) {
-      console.log(payload.shopList)
       state.shopList = payload.shopList
     }
   },
@@ -20,6 +20,18 @@ let store = new Vuex.Store({
         commit('changeShopListValue', {
           shopList: data.data
         })
+      })
+    },
+    setShopCarAsync ({commit}) {
+      Axios.post(
+        'http://localhost:3100/api/saveShopCar',
+        {
+          data: {
+            carList: {a: 1}
+          }
+        }
+      ).then((data) => {
+        console.log(data)
       })
     }
   }
