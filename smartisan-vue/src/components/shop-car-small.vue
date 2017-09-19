@@ -1,11 +1,11 @@
 <template lang="html">
-  <div>
+  <div  @mouseenter='carShowHandle' @mouseleave='carShow=false'>
     <a href="javascript:;">购物车</a>
     <!--根据class改变颜色-->
     <span class="cart-empty-num cart-num">
       <i>0</i>
     </span>
-    <div class="nav-cart-wrapper">
+    <div class="nav-cart-wrapper" v-show='carShow'>
       <div class="nav-cart-list">
         <div class="empty">
           <h3>购物车为空</h3>
@@ -54,6 +54,17 @@
 
 <script>
 export default {
+  data () {
+    return {
+      carShow: false
+    }
+  },
+  methods: {
+    carShowHandle () {
+      console.log(123)
+      this.carShow = true
+    }
+  }
 }
 </script>
 
