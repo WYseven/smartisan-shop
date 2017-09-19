@@ -9,9 +9,29 @@ let store = new Vuex.Store({
     shopList: {},  // 商品列表
     shopCarList: [] // 小购物车列表
   },
+  getters: {
+    carShopTotalInfo (state) {
+      let j = {
+        totalNum: 0,
+        totalPric: 0
+      }
+      state.shopCarList.reduce((prevValue, currentValue) => {
+        prevValue.totalNum += currentValue.sku_num
+        prevValue.totalPric += currentValue.price * currentValue.sku_num
+        return prevValue
+      }, j)
+
+      console.log(j)
+
+      return j
+    }
+  },
   mutations: {
     changeShopListValue (state, payload) {
       state.shopList = payload.shopList
+    },
+    setShopCarList (state, payload) {
+      state.shopCarList = payload.data.car_list
     }
   },
   actions: {
@@ -22,16 +42,30 @@ let store = new Vuex.Store({
         })
       })
     },
-    setShopCarAsync ({commit}) {
+    setShopCarAsync ({commit}, payload) {
       Axios.post(
-        'http://localhost:3100/api/saveShopCar',
+        'http://localhost:3100/api/setShopCarList',
         {
-          data: {
-            carList: {a: 1}
-          }
+          carList: JSON.stringify(payload)
+        }
+      ).then((data) => {
+        commit('setShopCarList', data)
+      })
+    },
+    getShopCarList ({commit}) {
+      Axios.get('http://localhost:3100/api/getShopCarList').then((data) => {
+        commit('setShopCarList', data)
+      })
+    },
+    removeCarShopByIdAsync ({commit}, payload) {
+      Axios.post(
+        'http://localhost:3100/api/removeCarShopById',
+        {
+          removeId: payload.id
         }
       ).then((data) => {
         console.log(data)
+        // commit('setShopCarList', data)
       })
     }
   }

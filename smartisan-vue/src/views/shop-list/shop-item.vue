@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     addShopCarHandle () {
-      this.$store.dispatch('setShopCarAsync')
+      this.$store.dispatch('setShopCarAsync', this.sItem)
     }
   }
 }

@@ -62,10 +62,15 @@
   float: left;
 }
 
-.nav-aside li a {
+.nav-aside li div> a {
   font-size: 0;
 }
 
+.price-icon , .price-num {
+    color: #d44d44;
+    font-weight: 700;
+    font-size: 16px;
+}
 
 /*用户列表*/
 
@@ -229,7 +234,7 @@
   width: 61px;
 }
 
-.nav-cart a {
+.nav-cart div > a {
   display: block;
   position: absolute;
   left: 0;
@@ -239,7 +244,7 @@
   z-index: 1;
 }
 
-.nav-cart a:before {
+.nav-cart div > a:before {
   content: ' ';
   position: absolute;
   left: 0;
