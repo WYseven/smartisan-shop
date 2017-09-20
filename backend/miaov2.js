@@ -98,8 +98,17 @@ app.get('/api/getShopCarList', (req, res) => {
   })
 }) */
 
-app.post('/api/removeCarShopById', () => {
-  
+app.post('/api/removeCarShopById', (req, res) => {
+  let {removeId} = req.body;
+  let isExist = fs.existsSync('./data/carList.json')
+  if(isExist){
+    let d = fs.readFileSync('./data/carList.json')
+    if(d.toString()){
+      
+    }
+    return
+
+  }
 })
 
 app.get('/item', (req, res) => {
