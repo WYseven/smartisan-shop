@@ -3489,7 +3489,80 @@
 					id,name,price,sale_status,sku_info
 				})
 			}
-			//console.log(JSON.stringify(arr,null,2));
+			console.log(JSON.stringify(arr,null,2));
+
+			// 取出所有的图片
+			let imgsArr = []
+			let re = /\/(\w+)\.(jpg|png)/
+			let re2 = /\/(\w+)/g
+			arr.forEach((item,index) => {
+				item.sku_info.forEach((item2) => {
+					imgsArr.push({
+						[item2.ali_image.match(re)[1]]: item2.ali_image
+					})
+					item2.spec_json.forEach((item3) => {
+						if(item3.image){
+							let s = "http://img01.smartisanos.cn/" + item3.image+"20X20@2x.jpg"
+							let a = s.match(re2);
+							imgsArr.push({
+								[a[a.length-2].slice(1)]: s
+							})
+						}
+
+					})
+				})
+			})
+			console.log(imgsArr)
+			console.log(console.log(JSON.stringify(imgsArr,null,2)))
+
+			/*
+			[
+		"http://image.smartisanos.cn/resource/c98abe89b5a5502ef04c30e751b2bfef.png",
+		"http://img01.smartisanos.cn/attr/v2/1000239/6A30AF98B0B61D85F25BC61EA1EB4F65/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/3bfde3e44b0fedacc8ec45e17b048e79.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000239/19CD5E834F1394CE5190285FCF64E0C0/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/f784c3fff80dc2f50d00ed56f958fcf6.png",
+		"http://img01.smartisanos.cn/attr/v2/1000239/689A14B1DFEC24EA8F9197B09C6453C7/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/d4480234a2f24b0ff5acd98288fd902d.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000235/3C2CBF845D452D576A412FFEE445C96A/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/afe5728faa22f4b078b84d9c725c136d.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000228/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/fe5d6ab15ed2fca6db8a23590cfcae8b.png",
+		"http://img01.smartisanos.cn/attr/v2/1000227/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/0540778097a009364f2dcbb8c5286451.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000299/B37F37544921114CEF1EC01ED4DF44E4/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/f6f081615fdd6f92206c3d127501843a.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000298/B1D74DE1EB579A14D2F97F6F56F508C4/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/3802197aa7e78f9429eb5f6048a25047.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000275/649AD35E36A9703BACBE1555AEB6D266/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/902befd5f32a8caf4ca79b55d39ee25a.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000271/948F029DCF134EF23267994487994DA5/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/554da94d8e4f84f03e0015fd1c997f46.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000271/649AD35E36A9703BACBE1555AEB6D266/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/6d39130f5ad4bfe1241c0c17211472c2.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000271/07BAF8C0EF046224A84B593DEEBC869E/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/46d4b1cc072c7daa0c69756ac62ab46e.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000271/52317E0C067C97FC6CE9376A2432CFFF/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/74b7284f703535111c46f1e34b0b1132.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000270/88DF40EC05F4F2F3F7E8568AEA6A9A8F/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/6c0f0d0a3daf70ae3008210a8834035f.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000268/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/dc53bd870ee64d2053ecc51750ece43a.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000267/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/c79a73ffc6f8e782160d978f49f543dc.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000266/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/5eba0b0d282f24b5d09dd9585bee4c44.png",
+		"http://img01.smartisanos.cn/attr/v2/1000225/E647E77234F9ED0FDE9DD4084D35FF57/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/30cacf4088f7105d16452c661afd9299.jpg",
+		"http://img01.smartisanos.cn/attr/v2/1000274/3555AF9D0704A3AE3ECB7DC7C6866775/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/1410440c8a690ec361e6e77de59939c6.png",
+		"http://img01.smartisanos.cn/attr/v2/1000223/16BBDBE3D35C0C4EF56427CBBDD7C4B1/20X20@2x.jpg",
+		"http://image.smartisanos.cn/resource/1ecd9a694236bbda7eb8f58860aae325.png",
+		"http://img01.smartisanos.cn/attr/v2/1000223/8E5E24A93E7DA19262F09A33A69DEC8E/20X20@2x.jpg"
+		]
+			*/
+
+
 			let arr2 = [];
 			let newArr = arr.map(function (item){
 				return item.sku_info.map((item2) => {
@@ -3514,7 +3587,7 @@
 				}
 			})
 
-			console.log(JSON.stringify(arr4,null,2));
+			// console.log(JSON.stringify(arr4,null,2));
 
 		</script>
 	</head>

@@ -134,7 +134,7 @@ app.get('/item', (req, res) => {
   let {id} = req.query;
 
 })
-
-app.listen(3100, () => {
-  console.log('Listening on: http://localhost:3100');
+//'192.168.2.81',
+app.listen(3100,  () => {
+  console.log('Listening on: http://192.168.2.81:3100');
 });

@@ -1,23 +1,25 @@
 [
   {
-    "id": 1000239,
+    "id": 1000239,          // 商品的id
     "name": "Smartisan 半入耳式线控耳机",
-    "price": 99,
-    "sale_status": 3,
-    "sku_info": [
+    "price": 99,            // 价格
+    "sale_status": 3,  // 可选字段
+    "sku_info": [  // 这个商品的三种规格
       {
+        // 图片地址
         "ali_image": "http://image.smartisanos.cn/resource/c98abe89b5a5502ef04c30e751b2bfef.png",
         "color_id": "70",
-        "direct_to_cart": false,
-        "sku_id": "100023901",
-        "sub_title": "卓越的 14.2mm 发音单元、三按键式线控",
-        "title": "Smartisan 半入耳式线控耳机",
+        "direct_to_cart": false, // 是否直接可以添加到购物车
+        "sku_id": "100023901",   // 商品的id
+        "sub_title": "卓越的 14.2mm 发音单元、三按键式线控", // 小标题
+        "title": "Smartisan 半入耳式线控耳机", // 标题
         "spec_json": [
           {
             "spec_id": "1",
             "spec_value_id": "70",
-            "show_name": "灰色",
-            "item_value": "灰色",      
+            "show_name": "灰色",  // 要展示在小购物车的颜色
+            "item_value": "灰色", 
+            // 每一个小圆圈的图片       
             "image": "attr/v2/1000239/6A30AF98B0B61D85F25BC61EA1EB4F65/"
           },
           {
