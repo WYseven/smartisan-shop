@@ -67,9 +67,10 @@ export default {
   methods: {
     addShopCarHandle () {
       // 判断是否添加超过了5
-      console.log(this.$store.state.shopCarList)
-      console.log(this.sItem)
-      this.$store.dispatch('setShopCarAsync', this.sItem)
+      let num = this.$store.getters.getShopSkuNum(this.sItem.sku_id)
+      if (num < 5) {
+        this.$store.dispatch('setShopCarAsync', this.sItem)
+      }
     }
   }
 }

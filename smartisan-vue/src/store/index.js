@@ -21,6 +21,15 @@ let store = new Vuex.Store({
         return prevValue
       }, j)
       return j
+    },
+    getShopSkuNum (state) {
+      return function (id) {
+        let findShopById = state.shopCarList.find((item) => {
+          return item.sku_id === id
+        })
+
+        return findShopById ? findShopById.sku_num : 0
+      }
     }
   },
   mutations: {
