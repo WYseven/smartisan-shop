@@ -56,7 +56,18 @@ app.post('/api/setShopCarList', (req, res) => {
   })
 
   if(findData){
-    findData.sku_num = ++findData.sku_num
+    if(findData.sku_num < 5){
+      findData.sku_num = ++findData.sku_num
+    }else{
+      res.send({
+        code: 1,
+        mesText: '已达到上限',
+        car_list: arr
+      })
+      return;
+    }
+
+
   }else {
     getDate.sku_num = 1
     getDate.price = shopItem.list[getDate.sku_id].data.price
@@ -66,8 +77,11 @@ app.post('/api/setShopCarList', (req, res) => {
   fs.writeFileSync('./data/carList.json', JSON.stringify(arr))
 
   res.send({
+    code: 0,
     car_list: arr
   })
+
+
 })
 
 
@@ -104,10 +118,15 @@ app.post('/api/removeCarShopById', (req, res) => {
   if(isExist){
     let d = fs.readFileSync('./data/carList.json')
     if(d.toString()){
-      
+      d = JSON.parse(d.toString())
+      d = d.filter(item => {
+        return item.sku_id !== removeId
+      })
+      fs.writeFileSync('./data/carList.json', JSON.stringify(d))
+      res.send({
+        car_list: d
+      })
     }
-    return
-
   }
 })
 

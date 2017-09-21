@@ -20,9 +20,6 @@ let store = new Vuex.Store({
         prevValue.totalPric += currentValue.price * currentValue.sku_num
         return prevValue
       }, j)
-
-      console.log(j)
-
       return j
     }
   },
@@ -42,14 +39,17 @@ let store = new Vuex.Store({
         })
       })
     },
-    setShopCarAsync ({commit}, payload) {
-      Axios.post(
+    async setShopCarAsync ({commit}, payload) {
+      return Axios.post(
         'http://localhost:3100/api/setShopCarList',
         {
           carList: JSON.stringify(payload)
         }
       ).then((data) => {
-        commit('setShopCarList', data)
+        if (data.data.code === 0) {
+          commit('setShopCarList', data)
+        }
+        return data
       })
     },
     getShopCarList ({commit}) {
@@ -64,8 +64,7 @@ let store = new Vuex.Store({
           removeId: payload.id
         }
       ).then((data) => {
-        console.log(data)
-        // commit('setShopCarList', data)
+        commit('setShopCarList', data)
       })
     }
   }
