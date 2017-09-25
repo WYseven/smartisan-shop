@@ -27,7 +27,11 @@
             </div>
           </li>
           <!--active-->
-          <li class="nav-cart">
+          <li class="nav-cart"
+            @mouseenter="$store.commit('changeSmallCarShow', {bl: true})"
+            @mouseleave="$store.commit('changeSmallCarShow', {bl: false})"
+            :class='{active: isSmallCarShop2}'
+          >
             <shop-car-small></shop-car-small>
           </li>
         </ul>
@@ -49,7 +53,9 @@
             <li><a href="javascript:;">首页</a></li>
             <li><a href="javascript:;">手机</a></li>
             <li><a href="javascript:;">“足迹系列”手感膜</a></li>
-            <li class="active"><a href="javascript:;">官方配件</a></li>
+            <li class="active">
+              <router-link :to="{ name: 'List' }">官方配件</router-link>
+            </li>
             <li><a href="javascript:;">周边产品</a></li>
             <li><a href="javascript:;">第三方配件</a></li>
             <li><a href="javascript:;">全部商品</a></li>
@@ -64,6 +70,11 @@
 <script>
 import ShopCarSmall from '@/components/shop-car-small'
 export default {
+  computed: {
+    isSmallCarShop2 () {
+      return this.$store.state.isSmallCarShop
+    }
+  },
   components: {
     ShopCarSmall
   }

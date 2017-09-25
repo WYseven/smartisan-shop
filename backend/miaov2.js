@@ -58,6 +58,7 @@ app.post('/api/setShopCarList', (req, res) => {
   if(findData){
     if(findData.sku_num < 5){
       findData.sku_num = ++findData.sku_num
+      findData.totalPrice = findData.sku_num * findData.price
     }else{
       res.send({
         code: 1,
@@ -71,6 +72,7 @@ app.post('/api/setShopCarList', (req, res) => {
   }else {
     getDate.sku_num = 1
     getDate.price = shopItem.list[getDate.sku_id].data.price
+    getDate.totalPrice = getDate.sku_num * getDate.price
     arr.push(getDate);
   }
 
@@ -96,21 +98,11 @@ app.get('/api/getShopCarList', (req, res) => {
       })
     }
     return
-
   }
   res.send({
     car_list: []
   })
 })
-/* fs.readFile('./data/shop-item.json', (error, data) => {
-  let data2 = JSON.parse(data.toString());
-  let json = {};
-  data2.map((item) => {
-    if(item.data){
-      json[item.data.id] = item
-    }
-  })
-}) */
 
 app.post('/api/removeCarShopById', (req, res) => {
   let {removeId} = req.body;

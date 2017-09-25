@@ -7,7 +7,8 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
   state: {
     shopList: {},  // 商品列表
-    shopCarList: [] // 小购物车列表
+    shopCarList: [], // 小购物车列表
+    isSmallCarShop: false // 控制显示隐藏小购物车
   },
   getters: {
     carShopTotalInfo (state) {
@@ -38,6 +39,14 @@ let store = new Vuex.Store({
     },
     setShopCarList (state, payload) {
       state.shopCarList = payload.data.car_list
+    },
+    changeSmallCarShow (state, payload) {
+      state.isSmallCarShop = payload.bl
+      if (payload.setTime) {
+        state.timer = setTimeout(() => {
+          state.isSmallCarShop = false
+        }, payload.setTime)
+      }
     }
   },
   actions: {
@@ -57,6 +66,10 @@ let store = new Vuex.Store({
       ).then((data) => {
         if (data.data.code === 0) {
           commit('setShopCarList', data)
+          commit('changeSmallCarShow', {
+            bl: true,
+            setTime: 2000
+          })
         }
         return data
       })

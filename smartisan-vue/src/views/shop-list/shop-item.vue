@@ -67,10 +67,12 @@ export default {
   methods: {
     addShopCarHandle () {
       // 判断是否添加超过了5
-      let num = this.$store.getters.getShopSkuNum(this.sItem.sku_id)
-      if (num < 5) {
-        this.$store.dispatch('setShopCarAsync', this.sItem)
-      }
+      this.$store.dispatch('setShopCarAsync', this.sItem)
+      .then((data) => {
+        if (data.data.code === 1) {
+          alert('已达到上限')
+        }
+      })
     }
   }
 }
