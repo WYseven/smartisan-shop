@@ -28,7 +28,7 @@
           </li>
           <!--active-->
           <li class="nav-cart">
-            <shop-car-small></shop-car-small>
+            <!-- <shop-car-small></shop-car-small> -->
           </li>
         </ul>
         <ul class="nav-list">

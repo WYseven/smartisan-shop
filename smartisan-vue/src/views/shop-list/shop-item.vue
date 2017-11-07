@@ -10,21 +10,24 @@
       <h3 >{{sItem.sub_title}}</h3>
       <div class="params-colors">
         <ul class="colors-list">
-          <li v-for='smallIcon,i in smallIcons'>
+          <li v-for='smallIcon,i in shopItem.sku_list'>
             <a href="javascript:;" :class="{active: i === index}" @mouseenter='index = i'>
-              <img :src="'http://img01.smartisanos.cn/'+smallIcon.image+'/20X20.jpg'">
+              <img :src="shopItem.image_pre+smallIcon.image+'/20X20.jpg'">
             </a>
           </li>
         </ul>
       </div>
       <div class="item-btns clearfix" v-if='sItem.direct_to_cart'>
         <span class="item-gray-btn">
-          <a href="javascript:;" target="_blank">查看详情</a>
+          <a :href="itemUrlStr" target="_blank">查看详情</a>
+          <!-- <router-link :to="{path:'/item/'+shopItem.id,query:{id:sItem.sku_id}}">查看详情</router-link> -->
         </span>
-        <span class="item-blue-btn" @click="addShopCarHandle">加入购物车 </span>
+        <span class="item-blue-btn">加入购物车 </span>
       </div>
       <div class="item-btns clearfix" v-if='!sItem.direct_to_cart'>
-        <span class="item-gray-btn"><a href="#/item/100023902" target="_blank">查看详情</a> </span>
+        <span class="item-gray-btn">
+          <router-link :to="itemUrlLink">查看详情</router-link> 
+        </span>
       </div>
       <div class="item-price clearfix">
         <i>¥</i><span>{{shopItem.price}}.00</span>
@@ -54,22 +57,17 @@ export default {
   },
   computed: {
     sItem () {
-      return this.shopItem.sku_info[this.index]
+      return this.shopItem.sku_list[this.index]
     },
-    smallIcons () {
-      return this.shopItem.sku_info.map((item) => {
-        return {
-          image: item.spec_json[0].image
+    itemUrlStr () { // 适合字符串拼接形式
+      return this.itemUrlLink.path + '?id=' + this.itemUrlLink.query.id
+    },
+    itemUrlLink () { // 适合router-link的形式
+      return {
+        path: '/item/' + this.shopItem.id,
+        query: {
+          id: this.sItem.sku_id
         }
-      })
-    }
-  },
-  methods: {
-    addShopCarHandle () {
-      // 判断是否添加超过了5
-      let num = this.$store.getters.getShopSkuNum(this.sItem.sku_id)
-      if (num < 5) {
-        this.$store.dispatch('setShopCarAsync', this.sItem)
       }
     }
   }

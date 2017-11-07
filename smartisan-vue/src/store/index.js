@@ -1,79 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from 'axios'
-
 Vue.use(Vuex)
+
+import {
+  shopListMethod
+} from '../api/api_method'
 
 let store = new Vuex.Store({
   state: {
-    shopList: {},  // 商品列表
-    shopCarList: [] // 小购物车列表
-  },
-  getters: {
-    carShopTotalInfo (state) {
-      let j = {
-        totalNum: 0,
-        totalPric: 0
-      }
-      state.shopCarList.reduce((prevValue, currentValue) => {
-        prevValue.totalNum += currentValue.sku_num
-        prevValue.totalPric += currentValue.price * currentValue.sku_num
-        return prevValue
-      }, j)
-      return j
-    },
-    getShopSkuNum (state) {
-      return function (id) {
-        let findShopById = state.shopCarList.find((item) => {
-          return item.sku_id === id
-        })
-
-        return findShopById ? findShopById.sku_num : 0
-      }
-    }
+    shopList: {}  // 商品列表
   },
   mutations: {
     changeShopListValue (state, payload) {
-      state.shopList = payload.shopList
+      state.shopList = payload.shop_list
     },
     setShopCarList (state, payload) {
       state.shopCarList = payload.data.car_list
     }
   },
   actions: {
-    getShopDataAsync ({commit}) {
-      Axios.get('http://localhost:3100/api/list').then((data) => {
-        commit('changeShopListValue', {
-          shopList: data.data
-        })
-      })
-    },
-    async setShopCarAsync ({commit}, payload) {
-      return Axios.post(
-        'http://localhost:3100/api/setShopCarList',
-        {
-          carList: JSON.stringify(payload)
-        }
-      ).then((data) => {
-        if (data.data.code === 0) {
-          commit('setShopCarList', data)
-        }
-        return data
-      })
-    },
-    getShopCarList ({commit}) {
-      Axios.get('http://localhost:3100/api/getShopCarList').then((data) => {
-        commit('setShopCarList', data)
-      })
-    },
-    removeCarShopByIdAsync ({commit}, payload) {
-      Axios.post(
-        'http://localhost:3100/api/removeCarShopById',
-        {
-          removeId: payload.id
-        }
-      ).then((data) => {
-        commit('setShopCarList', data)
+    // 获取商品列表数据
+    getShopListDataAction ({commit}) {
+      shopListMethod().then((data) => {
+        commit('changeShopListValue', data.data)
       })
     }
   }
