@@ -36,7 +36,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getShopListDataAction')
+    this.$store.dispatch('shopListDataAction')
   }
 }
 </script>
