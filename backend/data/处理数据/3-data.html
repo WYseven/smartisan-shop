@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./data.js"></script>
+		<script>
+
+			/*let list = [
+				{
+					"id": 1000239,
+			        "name": "Smartisan 半入耳式线控耳机",
+			        "price": 99.00,
+			        "image_pre": "http://img01.smartisanos.cn/",
+			        "sku_list":[
+			        	{
+			        		"sku_id": "100023901",
+				            "title": "Smartisan S-100 线控耳机",
+				            "sub_title": "卓越的 14.2mm 发音单元、三按键式线控",
+			                "image": "attr/v2/1000239/19CD5E834F1394CE5190285FCF64E0C0/",
+			                "show_short_name": "红色",
+			        	}
+			        ]
+				}
+			]*/
+
+			let list = data.data.list;
+
+			let newList = list.map((item) => {
+						let {id} = item;
+						let sku_list_ids = [];
+
+						item.sku_info.forEach((item2) => {
+							let arr = item2.spec_json.map((item3) => {
+								return {show_name:item3.show_name,spec_value_id:item3.spec_value_id,spec_id:item3.spec_id}
+							})
+							sku_list_ids.push({
+								sku_id:item2.sku_id,
+								spec_json:arr
+							})
+						})
+						
+						return {id,sku_list_ids}
+					});
+
+			console.log(JSON.stringify(newList,null,2));
+
+
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+</html>

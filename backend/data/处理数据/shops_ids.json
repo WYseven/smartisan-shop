@@ -1,0 +1,432 @@
+let shop_ids = [
+  {
+    "id": 1000239,
+    "sku_list_ids": [
+      {
+        "sku_id": "100023901",
+        "spec_json": [
+          {
+            "show_name": "灰色",
+            "spec_value_id": "70",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "3.5 mm",
+            "spec_value_id": "204",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100023902",
+        "spec_json": [
+          {
+            "show_name": "红色",
+            "spec_value_id": "35",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "3.5 mm",
+            "spec_value_id": "204",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100023903",
+        "spec_json": [
+          {
+            "show_name": "黑色",
+            "spec_value_id": "36",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "3.5 mm",
+            "spec_value_id": "204",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100023905",
+        "spec_json": [
+          {
+            "show_name": "红色",
+            "spec_value_id": "35",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "Type-C",
+            "spec_value_id": "205",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100023906",
+        "spec_json": [
+          {
+            "show_name": "黑色",
+            "spec_value_id": "36",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "Type-C",
+            "spec_value_id": "205",
+            "spec_id": "19"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000235,
+    "sku_list_ids": [
+      {
+        "sku_id": "100023501",
+        "spec_json": [
+          {
+            "show_name": "金属灰色",
+            "spec_value_id": "7",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000228,
+    "sku_list_ids": [
+      {
+        "sku_id": "100022801",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "3.5 mm",
+            "spec_value_id": "204",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100022803",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "Type-C",
+            "spec_value_id": "205",
+            "spec_id": "19"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000227,
+    "sku_list_ids": [
+      {
+        "sku_id": "100022701",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "0.2m",
+            "spec_value_id": "161",
+            "spec_id": "16"
+          }
+        ]
+      },
+      {
+        "sku_id": "100022702",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "1.5m",
+            "spec_value_id": "162",
+            "spec_id": "16"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000299,
+    "sku_list_ids": [
+      {
+        "sku_id": "100029901",
+        "spec_json": [
+          {
+            "show_name": "灰色",
+            "spec_value_id": "70",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000298,
+    "sku_list_ids": [
+      {
+        "sku_id": "100029801",
+        "spec_json": [
+          {
+            "show_name": "透明",
+            "spec_value_id": "211",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000275,
+    "sku_list_ids": [
+      {
+        "sku_id": "100027501",
+        "spec_json": [
+          {
+            "show_name": "黑色",
+            "spec_value_id": "36",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000274,
+    "sku_list_ids": [
+      {
+        "sku_id": "100027401",
+        "spec_json": [
+          {
+            "show_name": "透明",
+            "spec_value_id": "211",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000271,
+    "sku_list_ids": [
+      {
+        "sku_id": "100027101",
+        "spec_json": [
+          {
+            "show_name": "红色",
+            "spec_value_id": "35",
+            "spec_id": "1"
+          }
+        ]
+      },
+      {
+        "sku_id": "100027102",
+        "spec_json": [
+          {
+            "show_name": "黑色",
+            "spec_value_id": "36",
+            "spec_id": "1"
+          }
+        ]
+      },
+      {
+        "sku_id": "100027103",
+        "spec_json": [
+          {
+            "show_name": "巧克力色",
+            "spec_value_id": "41",
+            "spec_id": "1"
+          }
+        ]
+      },
+      {
+        "sku_id": "100027104",
+        "spec_json": [
+          {
+            "show_name": "浅金色",
+            "spec_value_id": "207",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000270,
+    "sku_list_ids": [
+      {
+        "sku_id": "100027001",
+        "spec_json": [
+          {
+            "show_name": "银色",
+            "spec_value_id": "86",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "3.5 mm",
+            "spec_value_id": "204",
+            "spec_id": "19"
+          }
+        ]
+      },
+      {
+        "sku_id": "100027002",
+        "spec_json": [
+          {
+            "show_name": "银色",
+            "spec_value_id": "86",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "Type-C",
+            "spec_value_id": "205",
+            "spec_id": "19"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000268,
+    "sku_list_ids": [
+      {
+        "sku_id": "100026801",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000267,
+    "sku_list_ids": [
+      {
+        "sku_id": "100026701",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000266,
+    "sku_list_ids": [
+      {
+        "sku_id": "100026601",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000225,
+    "sku_list_ids": [
+      {
+        "sku_id": "100022501",
+        "spec_json": [
+          {
+            "show_name": "白色",
+            "spec_value_id": "37",
+            "spec_id": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1000223,
+    "sku_list_ids": [
+      {
+        "sku_id": "100022301",
+        "spec_json": [
+          {
+            "show_name": "红色",
+            "spec_value_id": "35",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "适用于 Smartisan M1",
+            "spec_value_id": "159",
+            "spec_id": "15"
+          }
+        ]
+      },
+      {
+        "sku_id": "100022302",
+        "spec_json": [
+          {
+            "show_name": "红色",
+            "spec_value_id": "35",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "适用于 Smartisan M1L",
+            "spec_value_id": "160",
+            "spec_id": "15"
+          }
+        ]
+      },
+      {
+        "sku_id": "100022303",
+        "spec_json": [
+          {
+            "show_name": "咖啡色",
+            "spec_value_id": "41",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "适用于 Smartisan M1",
+            "spec_value_id": "159",
+            "spec_id": "15"
+          }
+        ]
+      },
+      {
+        "sku_id": "100022304",
+        "spec_json": [
+          {
+            "show_name": "咖啡色",
+            "spec_value_id": "41",
+            "spec_id": "1"
+          },
+          {
+            "show_name": "适用于 Smartisan M1L",
+            "spec_value_id": "160",
+            "spec_id": "15"
+          }
+        ]
+      }
+    ]
+  }
+]
