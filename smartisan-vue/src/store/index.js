@@ -5,7 +5,7 @@ Vue.use(Vuex)
 import {
   shopListMethod,
   shopItemMethod
-} from '../api/api_method'
+} from '@/api/api_method'
 
 /**
  * 错误处理

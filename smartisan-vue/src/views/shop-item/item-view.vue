@@ -24,7 +24,11 @@
 								<span class="params-name">{{item.spec_name}}</span>
 								<ul 
 									:class="{'params-colors':item.spec_id == 1,'params-normal': item.spec_id != 1}">
-									<li class="{cur}" v-for='spec_values,index in item.spec_values'>
+									<li 
+										:class="{cur:isIncludeId(spec_values.id)}" 
+										v-for='spec_values,index in item.spec_values'
+										@click="spellData(item.spec_id,spec_values.id)"
+									>
 										<a>
 											<span v-if='item.spec_id != 1'>{{spec_values.show_short_name}}</span>
 											<img 
@@ -60,6 +64,9 @@
 
 <script>
 import ItemTab from '@/views/shop-item/item-tab'
+import {
+  getShopItemId
+} from '@/api/api_method'
 export default {
 	components: {
 		ItemTab
@@ -67,12 +74,43 @@ export default {
 	computed: {
 		shopItem () {
       return this.$store.state.shopItem || {}
+		},
+		specJson () {
+			return this.shopItem.spec_json || []
 		}
 	},
   created () {
     let id = this.$route.query.id
     this.$store.dispatch('shopItemByIdAction', {id})
-  }
+	},
+	methods: {
+		// 检测那些是被选中的
+		isIncludeId(id){
+			return !!this.specJson.find((item) => {
+				return item.spec_value_id === id
+			})
+		},
+		// 点击拼接选中的项，得到对应商品的id
+		spellData(specId,specValuesId){
+			let specItem = this.specJson.find((item) => {
+						return item.spec_id === specId
+					})
+			if(specItem){
+				specItem.spec_value_id = specValuesId
+			}
+
+			// 需要根据选中的specJson中的值，去找到对应id，更改地址栏的queryString
+
+			// 找到一类商品的父级id   根据筛选出的条件去匹配这类商品的子级商品
+
+			console.log(this.$route.params) // 一类的父级id
+
+			console.log(this.specJson)
+
+			getShopItemId(this.$route.params, this.specJson)
+
+		}
+	}
 }
 </script>
 
