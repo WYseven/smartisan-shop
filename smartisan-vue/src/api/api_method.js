@@ -35,28 +35,27 @@ export function shopItemMethod(id) {
  */
 
 export function getShopItemId(parentId, specJson) {
-
   let skuItem = ids.find((item) => {
         return item.id == parentId.id
       })
-
   console.log(skuItem)
-
   if (skuItem){
     // 判断specJson中的每一项在不在skuItem.spec_json中的每一项中
 
-    console.log(skuItem)
-
     let list = skuItem.sku_list_ids
-
     a:for (var i = 0; i < list.length; i++){
       let json = list[i].spec_json
       for (let j = 0; j < json.length; j++){
         // 通过测试
+        console.log(specJson.some((item) => {
+          console.log(item.spec_value_id, json[j].spec_value_id)
+          return item.spec_value_id == json[j].spec_value_id
+        }))
         if (!specJson.some((item) => item.spec_value_id == json[j].spec_value_id)){
           break;
         }else{
-          if(j === json.length){
+          console.log(j, json.length - 1)
+          if(j === json.length-1){
             console.log(list[i])
             break a;
           }
