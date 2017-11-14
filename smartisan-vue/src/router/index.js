@@ -5,6 +5,10 @@ import Shop from '@/views/shop'
 import List from '@/views/shop-list/shop-list'
 import Item from '@/views/shop-item/item-view'
 
+import Cart from '@/views/shop-cart/cart'
+
+import Checkout from '@/views/checkout/checkout'
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,9 +25,19 @@ export default new Router({
           component: List
         },
         {
-          path: '/item/:id?',
+          path: 'item/:id?',
           name: 'item',
           component: Item
+        },
+        {
+          path: 'cart',
+          name: 'Cart',
+          component: Cart
+        },
+        {
+          path: 'checkout',
+          name: 'Checkout',
+          component: Checkout
         }
       ]
     }
