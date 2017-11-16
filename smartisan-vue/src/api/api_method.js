@@ -12,7 +12,8 @@ function resolvePath (path) {
 
 let urls = {
   shopListUrl: '/api/shop_list',
-  shopItemUrl: '/api/shop_item'
+  shopItemUrl: '/api/shop_item',
+  addCartUrl: '/api/add_cart'
 }
 
 /* 请求商品列表的方法 */
@@ -41,9 +42,16 @@ export function getShopItemId(parentId, specJson) {
   console.log(skuItem)
   if (skuItem){
     // 判断specJson中的每一项在不在skuItem.spec_json中的每一项中
-
-   
-
   }
+}
 
+/**
+ * 添加到购物车
+ * @param {String} shopId 添加到购物车的id
+ */
+export function addCartByIdMethod(skuId='') {
+
+  // 暂无接口
+
+  return Axios.get('http://localhost:8080/api/add_cart', { params: {skuId}})
 }

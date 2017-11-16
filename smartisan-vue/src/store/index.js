@@ -4,7 +4,8 @@ Vue.use(Vuex)
 
 import {
   shopListMethod,
-  shopItemMethod
+  shopItemMethod,
+  addCartByIdMethod
 } from '@/api/api_method'
 
 /**
@@ -17,7 +18,9 @@ function error (error) {
 let store = new Vuex.Store({
   state: {
     shopList: {},  // 商品列表
-    shopItem: {}   // 指定id的商品
+    shopItem: {},   // 指定id的商品
+    smallCart: [],
+    cartCounts: []  // 存放添加商品的数量
   },
   mutations: {
     changeShopListValue (state, payload) {
@@ -25,6 +28,18 @@ let store = new Vuex.Store({
     },
     changeShopItemValue (state, payload) {
       state.shopItem = payload.shop_item
+    },
+    changeSmallCart(state, payload) {
+      state.smallCart.push(payload)
+    },
+    changeCarCounts(state, payload) {
+
+      if (payload.isExist){
+        let item = state.cartCounts.find(item => payload.skuId === item.skuId);
+        item.count = ++item.count
+      }else{
+        state.cartCounts.push(payload)
+      }
     }
   },
   actions: {
@@ -38,6 +53,36 @@ let store = new Vuex.Store({
       shopItemMethod(paylod.id).then((data) => {
         commit('changeShopItemValue', data.data)
       }).catch(error)
+    },
+    // 发送商品的数量
+    addCartByCountAction({ commit, dispatch, state }, paylod) {
+      let skuId = paylod.skuId;
+
+      let item = state.cartCounts.find(item => skuId === item.skuId);
+
+      if (item){  // 存在说明已经发过了 只需要告诉后端商品和数量
+        commit('changeCarCounts', {
+          skuId,
+          isExist: true
+        })
+      }else{ // 没有存在说明没发过 告诉后端商品和数量，同时得到商品信息
+        commit('changeCarCounts', {
+          skuId,
+          count: 1
+        })
+        
+        dispatch('addCartByIdAction', { skuId })
+      }
+    },
+    // 添加到小购物车中
+    addCartByIdAction ({ commit }, paylod) {
+      addCartByIdMethod(paylod.skuId).then((data) => {
+        let d = data.data
+        if(d.code === 0){
+          commit('changeSmallCart', d.data.list[0])
+        }
+        
+      })
     }
   }
 })

@@ -20,9 +20,9 @@
       <div class="item-btns clearfix" v-if='sItem.direct_to_cart'>
         <span class="item-gray-btn">
           <a :href="itemUrlStr" target="_blank">查看详情</a>
-          <!-- <router-link :to="{path:'/item/'+shopItem.id,query:{id:sItem.sku_id}}">查看详情</router-link> -->
+          <!-- <router-link :to="{path:'/shop/item/'+shopItem.id,query:{id:sItem.sku_id}}">查看详情</router-link> -->
         </span>
-        <span class="item-blue-btn">加入购物车 </span>
+        <span class="item-blue-btn" @click="addCar">加入购物车 </span>
       </div>
       <div class="item-btns clearfix" v-if='!sItem.direct_to_cart'>
         <span class="item-gray-btn">
@@ -64,11 +64,25 @@ export default {
     },
     itemUrlLink () { // 适合router-link的形式
       return {
-        path: '/item/' + this.shopItem.id,
+        path: '/shop/item/' + this.shopItem.id,
         query: {
           id: this.sItem.sku_id
         }
       }
+    }
+  },
+  methods: {
+    // 加入购物车
+    addCar () {
+      console.log(123)
+      // 拿到要添加购物车商品的id
+      let skuId = this.sItem.sku_id
+
+      console.log(this.$store.state.cartCounts)
+
+      this.$store.dispatch('addCartByCountAction', {skuId})
+
+      // this.$store.dispatch('addCartByIdAction', {skuId})
     }
   }
 }

@@ -52,8 +52,8 @@
 						</div>
 						<div class="sku-status">
 							<div class="cart-operation-wrapper clearfix">
-								<span class="blue-title-btn js-add-cart"><a>加入购物车</a></span>
-								<span class="gray-title-btn"><a>现在购买</a></span>
+								<span class="blue-title-btn js-add-cart">加入购物车</span>
+								<span class="gray-title-btn" @click="nowBuyShop">现在购买</span>
 							</div>
 						</div>
 					</div>
@@ -109,6 +109,12 @@ export default {
 
 			getShopItemId(this.$route.params, this.specJson)
 
+		},
+		// 现在购买
+		nowBuyShop () {
+			this.$router.push({
+				path: '/shop/checkout'
+			})
 		}
 	}
 }

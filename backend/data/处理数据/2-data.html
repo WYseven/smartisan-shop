@@ -9,31 +9,11 @@
 		<script src="./data.js"></script>
 		<script>
 
-			/*let list = [
-				{
-					"id": 1000239,
-			        "name": "Smartisan 半入耳式线控耳机",
-			        "price": 99.00,
-			        "image_pre": "http://img01.smartisanos.cn/",
-			        "sku_list":[
-			        	{
-			        		"sku_id": "100023901",
-				            "title": "Smartisan S-100 线控耳机",
-				            "sub_title": "卓越的 14.2mm 发音单元、三按键式线控",
-			                "image": "attr/v2/1000239/19CD5E834F1394CE5190285FCF64E0C0/",
-			                "show_short_name": "红色",
-			        	}
-			        ]
-				}
-			]*/
-
 			let list = data.data.list;
 
 			let newList = list.map((item) => {
 						let {id,name,price,image_pre} = item;
 						let sku_list = [];
-
-
 
 						item.sku_info.forEach((item2) => {
 							if(!sku_list.find((item3) => item3.color_id === item2.color_id )){
@@ -45,7 +25,7 @@
 									return 	{image};
 								})
 
-								sku_list.push({direct_to_cart,ali_image,sku_id,sub_title,title,price,...spec_json[0]})
+								sku_list.push({direct_to_cart,ali_image,sku_id,sub_title,title,price,...spec_json[0],color_id})
 							}
 						})
 						
@@ -54,7 +34,7 @@
 						}
 					});
 
-			console.log(JSON.stringify(newList,null,2));
+			document.write(JSON.stringify(newList,null,2));
 
 
 		</script>

@@ -6,7 +6,7 @@
           <a href="javascript:;"></a>
         </h1>
         <ul class="nav-aside">
-          <li class="nav-user">
+          <li style="display:none;" class="nav-user">
             <a href="javascript:;">个人中心</a>
             <!--active-->
             <div class="nav-user-wrapper">
@@ -28,7 +28,7 @@
           </li>
           <!--active-->
           <li class="nav-cart">
-            <!-- <shop-car-small></shop-car-small> -->
+            <shop-car-small></shop-car-small>
           </li>
         </ul>
         <ul class="nav-list">
