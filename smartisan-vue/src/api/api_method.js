@@ -53,5 +53,5 @@ export function addCartByIdMethod(skuId='') {
 
   // 暂无接口
 
-  return Axios.get('http://localhost:8080/api/add_cart', { params: {skuId}})
+  return Axios.get('http://localhost:5000/api/add_cart', { params: {skuId}})
 }

@@ -76,9 +76,7 @@ export default {
     addCar () {
       console.log(123)
       // 拿到要添加购物车商品的id
-      let skuId = this.sItem.sku_id
-
-      console.log(this.$store.state.cartCounts)
+      let skuId = this.sItem.sku_id;
 
       this.$store.dispatch('addCartByCountAction', {skuId})
 

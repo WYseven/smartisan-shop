@@ -20,7 +20,8 @@ let store = new Vuex.Store({
     shopList: {},  // 商品列表
     shopItem: {},   // 指定id的商品
     smallCart: [],
-    cartCounts: []  // 存放添加商品的数量
+    cartCounts: {},  // 存放添加商品的数量
+    arr: []
   },
   mutations: {
     changeShopListValue (state, payload) {
@@ -34,11 +35,16 @@ let store = new Vuex.Store({
     },
     changeCarCounts(state, payload) {
 
+      state.arr.push(payload)
+
       if (payload.isExist){
-        let item = state.cartCounts.find(item => payload.skuId === item.skuId);
-        item.count = ++item.count
+        let item = state.cartCounts[payload.skuId];
+        Vue.set(state.cartCounts, payload.skuId, {
+          skuId: payload.skuId,
+          count: ++item.count
+        });
       }else{
-        state.cartCounts.push(payload)
+        state.cartCounts[payload.skuId] = payload;
       }
     }
   },
@@ -58,7 +64,7 @@ let store = new Vuex.Store({
     addCartByCountAction({ commit, dispatch, state }, paylod) {
       let skuId = paylod.skuId;
 
-      let item = state.cartCounts.find(item => skuId === item.skuId);
+      let item = state.cartCounts[skuId]
 
       if (item){  // 存在说明已经发过了 只需要告诉后端商品和数量
         commit('changeCarCounts', {
