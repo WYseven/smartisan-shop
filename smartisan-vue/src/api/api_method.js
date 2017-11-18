@@ -61,8 +61,19 @@ export function addShopCountMethod(obj) {
  * @param {String} shopId 添加到购物车的id
  */
 export function addCartByIdMethod(skuId='') {
+  
+    // 暂无接口
+  
+    return Axios.get('http://localhost:5000/api/add_cart', { params: {skuId}})
+  }
 
-  // 暂无接口
-
-  return Axios.get('http://localhost:5000/api/add_cart', { params: {skuId}})
-}
+  /**
+ * 根据id删除购物车商品
+ * @param {String} shopId 
+ */
+export function removeCarShopByIdMethod(skuId='') {
+  
+    // 暂无接口
+  
+    return Axios.get('http://localhost:5000/api/remove_ount', { params: {skuId}})
+  }

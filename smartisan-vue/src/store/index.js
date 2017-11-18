@@ -6,7 +6,8 @@ import {
   shopListMethod,
   shopItemMethod,
   addCartByIdMethod,
-  addShopCountMethod
+  addShopCountMethod,
+  removeCarShopByIdMethod
 } from '@/api/api_method'
 
 /**
@@ -29,7 +30,7 @@ let store = new Vuex.Store({
       state.cartCounts.forEach( (item) => {
         o[item.skuId] = item;
       })
-      console.log(state.cartCounts)
+      
       return o
     },
     smallCartAddCounts (state, getters) {
@@ -37,7 +38,7 @@ let store = new Vuex.Store({
       let cartCounts = getters.cartCountsTransObj;
       
       smallCart.forEach((item) => {
-        item.count = cartCounts[item.id].count
+        item.count = cartCounts[item.id] && cartCounts[item.id].count || 1
       })
 
       return smallCart
@@ -62,6 +63,14 @@ let store = new Vuex.Store({
     },
     changeShopItemValue (state, payload) {
       state.shopItem = payload.shop_item
+    },
+    changeSmallCartFilter (state) {
+      /// 要过滤一层，为了删除
+      let newShops = state.smallCart.filter((item) => {
+        return !!state.cartCounts.find(item2 => item.id == item2.skuId)
+      });
+      
+      state.smallCart = newShops
     },
     changeSmallCart(state, payload) {  // payload 是一个数组 list
       state.smallCart = state.smallCart.concat(payload.list)
@@ -146,6 +155,15 @@ let store = new Vuex.Store({
           commit('changeSmallCart', {list: d.data.list})
         }
         
+      })
+    },
+    // 删除小购物车商品
+    removeCarShopAction ({commit}, payload) {
+      removeCarShopByIdMethod(payload.skuId).then((data) => {
+        commit('changeCarCounts', {
+          cartCounts: data.data.idsList
+        })
+        commit('changeSmallCartFilter')
       })
     }
   }

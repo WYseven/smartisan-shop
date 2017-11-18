@@ -71,6 +71,22 @@ router.get('/count', function (req, res) {
   })
 })
 
+// 根据id移除购物车商品
+router.get('/remove_ount', function (req, res) {
+    let {skuId} = req.query;
+
+    shops = shops.filter((item) => {
+      return item.skuId !== skuId
+    })
+
+    res.send({
+      code: 0,
+      idsList: shops
+    })
+
+})
+
+
 module.exports = router
 
 

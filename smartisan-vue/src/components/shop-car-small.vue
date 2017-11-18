@@ -3,7 +3,7 @@
     <a href="javascript:;">购物车</a>
     <!--根据class改变颜色-->
     <span class="cart-empty-num cart-num">
-      <i>0</i>
+      <i>{{computedCountsAddPric.counts}}</i>
     </span>
     <div class="nav-cart-wrapper">
       <div class="nav-cart-list">
@@ -35,7 +35,7 @@
                         </h6>
                       </div>
                     </div>
-                    <div class="del-btn">删除</div>
+                    <div class="del-btn" @click="removeShop(item.id)">删除</div>
                   </div>
                 </div>
               </li>
@@ -71,6 +71,13 @@ export default {
   },
   created () {
     this.$store.dispatch('getCarShopsLoding')
+  },
+  methods: {
+    removeShop (skuId) {
+      this.$store.dispatch('removeCarShopAction', {
+        skuId
+      })
+    }
   }
 }
 </script>
