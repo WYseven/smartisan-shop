@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./data-xiangqingye.js"></script>
+		<script>
+
+			// 详情页抽离有用的数据
+			let datas = data.data;
+
+			/*let {
+				title,
+				sub_title,
+				limit_num,
+				ali_images,
+				ali_image,
+				spec_v2:[],
+				spec_json
+			} = data.shop_info */
+
+			let {
+				id,
+				spu_id,
+				name,
+				in_stock,
+    			stock,
+    			price,
+				sku_info: {
+					title,
+					sub_title,
+					limit_num,
+					ali_images,
+					ali_image,
+					spec_v2:[]
+				}
+			} = datas;
+
+			let d = {
+				id,
+				spu_id,
+				name,
+				in_stock,
+    			stock,
+    			price,
+				shop_info: {
+					title,
+					sub_title,
+					limit_num,
+					ali_images,
+					ali_image,
+					spec_v2:[]
+				}
+			}
+			d.spec_json =  datas.shop_info.spec_json.map(function (item){
+						return {
+							spec_id:item.spec_id,
+							spec_value_id: item.spec_value_id,
+							show_name:item.show_name
+						}
+					})
+			d.spec_v2 =  datas.shop_info.spec_v2.map((item2) => {
+				return {
+						spec_name: item2.spec_name,
+						spec_id: item2.spec_id,
+						image_pre: item2.image_pre,
+						spec_values: item2.spec_values.map((item3) => {
+							return {
+								id:item3.id,
+								show_short_name:item3.show_short_name,
+								image:item3.image
+							}
+						})
+					}
+			})
+
+			console.log(JSON.stringify(d,null,2));
+
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+</html>

@@ -1,92 +1,151 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from 'axios'
-
 Vue.use(Vuex)
+
+import {
+  shopListMethod,
+  shopItemMethod,
+  addCartByIdMethod,
+  addShopCountMethod
+} from '@/api/api_method'
+
+/**
+ * 错误处理
+ */
+function error (error) {
+  throw new Error(error)
+}
 
 let store = new Vuex.Store({
   state: {
     shopList: {},  // 商品列表
-    shopCarList: [], // 小购物车列表
-    isSmallCarShop: false // 控制显示隐藏小购物车
+    shopItem: {},   // 指定id的商品
+    smallCart: [],
+    cartCounts: []  // 存放添加商品的数量
   },
   getters: {
-    carShopTotalInfo (state) {
-      let j = {
-        totalNum: 0,
-        totalPric: 0
-      }
-      state.shopCarList.reduce((prevValue, currentValue) => {
-        prevValue.totalNum += currentValue.sku_num
-        prevValue.totalPric += currentValue.price * currentValue.sku_num
-        return prevValue
-      }, j)
-      return j
+    cartCountsTransObj (state) {
+      let o = {};
+      state.cartCounts.forEach( (item) => {
+        o[item.skuId] = item;
+      })
+      console.log(state.cartCounts)
+      return o
     },
-    getShopSkuNum (state) {
-      return function (id) {
-        let findShopById = state.shopCarList.find((item) => {
-          return item.sku_id === id
-        })
+    smallCartAddCounts (state, getters) {
+      let smallCart = state.smallCart;
+      let cartCounts = getters.cartCountsTransObj;
+      
+      smallCart.forEach((item) => {
+        item.count = cartCounts[item.id].count
+      })
 
-        return findShopById ? findShopById.sku_num : 0
-      }
+      return smallCart
+    },
+    computedCountsAddPric (state, getters) {
+      let smallCartAddCounts = getters.smallCartAddCounts;
+      return  smallCartAddCounts.reduce((obj, item) => {
+                let price = parseInt(item.count) * parseInt(item.price)
+                return {
+                  prices: obj.prices + price,
+                  counts: obj.counts + parseInt(item.count)
+                }
+              }, {
+                prices: 0,
+                counts: 0
+              })
     }
   },
   mutations: {
     changeShopListValue (state, payload) {
-      state.shopList = payload.shopList
+      state.shopList = payload.shop_list
     },
-    setShopCarList (state, payload) {
-      state.shopCarList = payload.data.car_list
+    changeShopItemValue (state, payload) {
+      state.shopItem = payload.shop_item
     },
-    changeSmallCarShow (state, payload) {
-      state.isSmallCarShop = payload.bl
-      if (payload.setTime) {
-        state.timer = setTimeout(() => {
-          state.isSmallCarShop = false
-        }, payload.setTime)
-      }
+    changeSmallCart(state, payload) {  // payload 是一个数组 list
+      state.smallCart = state.smallCart.concat(payload.list)
+    },
+    changeCarCounts(state, payload) {
+      state.cartCounts = payload.cartCounts
     }
   },
   actions: {
-    getShopDataAsync ({commit}) {
-      Axios.get('http://localhost:3100/api/list').then((data) => {
-        commit('changeShopListValue', {
-          shopList: data.data
+    // 获取商品列表数据
+    shopListDataAction ({commit}) {
+      shopListMethod().then((data) => {
+        commit('changeShopListValue', data.data)
+      }).catch(error)
+    },
+    shopItemByIdAction ({ commit }, paylod) {
+      shopItemMethod(paylod.id).then((data) => {
+        commit('changeShopItemValue', data.data)
+      }).catch(error)
+    },
+    // 发送商品的数量
+    cartByIdAddCountAction({ commit, dispatch, state }, paylod) {
+      let skuId = paylod.skuId;
+
+      let item = state.cartCounts.find(item => item.skuId === skuId)
+      let isExist = !!item;
+
+      // 这个地方需要重构
+
+      if (!item){  // 存在说明已经发过了 只需要告诉后端商品和数量
+        item = {
+          skuId,
+          count: 0
+        }
+      }
+
+      item = {
+        ...item,
+        count: ++item.count
+      }
+      
+      dispatch('addShopCountAction', item)
+      .then((data) => {
+        commit('changeCarCounts', {
+          cartCounts: data.data.idsList
+        })
+        if( !isExist ) {  // 如果不存在，则请求商品信息
+          dispatch('addCartByIdAction', {ids: [skuId]})
+        }
+        
+      })
+
+    },
+    // 发送和获取商品数量的action
+    addShopCountAction ({commit}, payload) {
+      return addShopCountMethod(payload)
+    },
+    getCarShopsLoding ({commit, dispatch}) {  // 一加载就获取加入购物车的商品数量
+      dispatch('addShopCountAction')
+      .then( (data) => {
+        let idsList = data.data.idsList;
+        if(idsList.length === 0){
+          return;
+        }
+        
+        commit('changeCarCounts', {
+          cartCounts: idsList
+        })
+        dispatch('addCartByIdAction',{
+          ids: idsList.map((item) => {
+            return item.skuId
+          })
         })
       })
     },
-    async setShopCarAsync ({commit}, payload) {
-      return Axios.post(
-        'http://localhost:3100/api/setShopCarList',
-        {
-          carList: JSON.stringify(payload)
+    // 添加到小购物车中
+    addCartByIdAction ({ commit }, paylod) {
+      let idsStr= paylod.ids.join(',');
+      addCartByIdMethod(idsStr).then((data) => {
+        let d = data.data
+        if(d.code === 0){
+          commit('changeSmallCart', {list: d.data.list})
         }
-      ).then((data) => {
-        if (data.data.code === 0) {
-          commit('setShopCarList', data)
-          commit('changeSmallCarShow', {
-            bl: true,
-            setTime: 2000
-          })
-        }
-        return data
-      })
-    },
-    getShopCarList ({commit}) {
-      Axios.get('http://localhost:3100/api/getShopCarList').then((data) => {
-        commit('setShopCarList', data)
-      })
-    },
-    removeCarShopByIdAsync ({commit}, payload) {
-      Axios.post(
-        'http://localhost:3100/api/removeCarShopById',
-        {
-          removeId: payload.id
-        }
-      ).then((data) => {
-        commit('setShopCarList', data)
+        
       })
     }
   }

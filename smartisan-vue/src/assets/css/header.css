@@ -291,7 +291,7 @@
 }
 
 .nav-cart-wrapper {
-  display: none;
+  -display: none;
   position: absolute;
   right: 0;
   padding-top: 18px;

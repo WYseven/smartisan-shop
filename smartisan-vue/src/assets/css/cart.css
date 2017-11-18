@@ -162,18 +162,18 @@
     padding-top: 4px;
     line-height: 17px;
 }
-.ui-cart .cart-items .name .attribute li{
+.hander-car .cart-items .name .attribute li{
   float: left;
     padding: 0 10px;
     position: relative;
 }
-.ui-cart .cart-items .name .attribute li:first-child{
+.hander-car .cart-items .name .attribute li:first-child{
   padding-left: 0;
 }
-.ui-cart .cart-items .item-cols-num,
-.ui-cart .cart-items .operation,
-.ui-cart .cart-items .price,
-.ui-cart .cart-items .subtotal{
+.hander-car .cart-items .item-cols-num, 
+.hander-car .cart-items .operation, 
+.hander-car .cart-items .price, 
+.hander-car .cart-items .subtotal{
   overflow: hidden;
     float: right;
     width: 137px;
@@ -181,12 +181,12 @@
     color: #666;
     line-height: 140px;
 }
-.ui-cart .cart-items .operation{
+.hander-car .cart-items .operation{
   padding: 58px 0 0;
   font-size: 12px;
   line-height: 24px;
 }
-.ui-cart .cart-items .operation .items-delete-btn{
+.hander-car .cart-items .operation .items-delete-btn{
   display: block;
     width: 24px;
     height: 24px;
@@ -199,7 +199,7 @@
 .cart-items .operation .items-delete-btn:hover{
   background-position: 0 -36px;
 }
-.ui-cart .cart-items .subtotal{
+.hander-car .cart-items .subtotal{
   font-weight: 700;
   text-align: right;
 }
@@ -222,6 +222,7 @@
     height: 37px;
     margin-right: 5px;
     background: url(../img/cart-updown.jpg) no-repeat;
+    background-image: url(../img/cart-updown.jpg);
     background-size: 100% auto;
     line-height: 40px;
     text-indent: -9999em;
@@ -437,8 +438,8 @@
   padding: 2px 32px;
   font-size: 16px;
 }
-.jianguo-blue-main-btn.disabled-btn a,
-.jianguo-blue-main-btn.disabled-btn:active a,
+.jianguo-blue-main-btn.disabled-btn a, 
+.jianguo-blue-main-btn.disabled-btn:active a, 
 .jianguo-blue-main-btn.disabled-btn:hover a{
   background: #B7B7B7;
   background: linear-gradient(#C3C3C3,#ABAAAA);
@@ -447,13 +448,4 @@
 .disabled-btn, .disabled-btn a{
   opacity: .7;
   cursor: not-allowed;
-}
-
-.cart-items .price{
-  overflow: hidden;
-  float: right;
-  width: 137px;
-  text-align: center;
-  color: #666;
-  line-height: 140px;
 }

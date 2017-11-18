@@ -1,0 +1,132 @@
+let shop_xiangqing = {
+  "id": 100026101,
+  "spu_id": 1000261,
+  "name": "Smartisan T恤 萌锤（酒红色，S）",
+  "in_stock": true,
+  "stock": 1,
+  "price": 149,
+  "shop_info": {
+    "title": "Smartisan T恤 萌锤",
+    "sub_title": "100% 美国 SUPIMA 棉、舒适拉绒质地",
+    "limit_num": "5",
+    "ali_images": [
+      "http://image.smartisanos.cn/resource/0b55e64f8a8982febe19ca9d1b790b9c.png",
+      "http://image.smartisanos.cn/resource/2a9cb3afe45e9c83375efdeb2c62e9af.png",
+      "http://image.smartisanos.cn/resource/ed8cca60f3365ac1114126cf604d704b.png",
+      "http://image.smartisanos.cn/resource/a5018b16a16abbc82090b80e3b1c1cc2.png",
+      "http://image.smartisanos.cn/resource/fff3f646b965d5414861709427debd8c.png"
+    ],
+    "ali_image": "http://image.smartisanos.cn/resource/0b55e64f8a8982febe19ca9d1b790b9c.png"
+  },
+  "spec_json": [
+    {
+      "spec_value_id": "154",
+      "show_name": "男款"
+    },
+    {
+      "spec_value_id": "201",
+      "show_name": "酒红色"
+    },
+    {
+      "spec_value_id": "124",
+      "show_name": "S"
+    }
+  ],
+  "spec_v2": [
+    {
+      "spec_name": "款式",
+      "spec_values": [
+        {
+          "id": "154",
+          "show_short_name": "男款",
+          "image": ""
+        },
+        {
+          "id": "155",
+          "show_short_name": "女款",
+          "image": ""
+        },
+        {
+          "id": "156",
+          "show_short_name": "儿童款",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "spec_name": "颜色",
+      "spec_values": [
+        {
+          "id": "201",
+          "show_short_name": "酒红色",
+          "image": "attr/v2/1000261/D67A68B1307B446956E081D736AC0D39/"
+        },
+        {
+          "id": "41",
+          "show_short_name": "咖啡色",
+          "image": "attr/v2/1000261/49082B45283C8D1BE08CF478AE4506AB/"
+        },
+        {
+          "id": "157",
+          "show_short_name": "藏蓝色",
+          "image": "attr/v2/1000261/85C73076D653AB42954D499C241A0D7E/"
+        }
+      ]
+    },
+    {
+      "spec_name": "尺码",
+      "spec_values": [
+        {
+          "id": "124",
+          "show_short_name": "S",
+          "image": ""
+        },
+        {
+          "id": "123",
+          "show_short_name": "M",
+          "image": ""
+        },
+        {
+          "id": "122",
+          "show_short_name": "L",
+          "image": ""
+        },
+        {
+          "id": "121",
+          "show_short_name": "XL",
+          "image": ""
+        },
+        {
+          "id": "120",
+          "show_short_name": "XXL",
+          "image": ""
+        },
+        {
+          "id": "133",
+          "show_short_name": "S (110cm)",
+          "image": ""
+        },
+        {
+          "id": "134",
+          "show_short_name": "M (120cm）",
+          "image": ""
+        },
+        {
+          "id": "135",
+          "show_short_name": "L (130cm)",
+          "image": ""
+        },
+        {
+          "id": "136",
+          "show_short_name": "XL (140cm)",
+          "image": ""
+        },
+        {
+          "id": "137",
+          "show_short_name": "XXL (150cm)",
+          "image": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+let shop_info = [
+  {
+    "id": 1000239,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "35",
+            "show_short_name": "红色",
+            "image": "attr/v2/1000239/19CD5E834F1394CE5190285FCF64E0C0/"
+          },
+          {
+            "id": "36",
+            "show_short_name": "黑色",
+            "image": "attr/v2/1000239/689A14B1DFEC24EA8F9197B09C6453C7/"
+          },
+          {
+            "id": "70",
+            "show_short_name": "灰色",
+            "image": "attr/v2/1000239/6A30AF98B0B61D85F25BC61EA1EB4F65/"
+          }
+        ]
+      },
+      {
+        "spec_name": "接口",
+        "spec_values": [
+          {
+            "id": "204",
+            "show_short_name": "3.5 mm",
+            "image": ""
+          },
+          {
+            "id": "205",
+            "show_short_name": "Type-C",
+            "image": ""
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000235,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "7",
+            "show_short_name": "金属灰色",
+            "image": "attr/v2/1000235/3C2CBF845D452D576A412FFEE445C96A/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000228,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000228/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      },
+      {
+        "spec_name": "接口",
+        "spec_values": [
+          {
+            "id": "204",
+            "show_short_name": "3.5 mm",
+            "image": ""
+          },
+          {
+            "id": "205",
+            "show_short_name": "Type-C",
+            "image": ""
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000227,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000227/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      },
+      {
+        "spec_name": "长度",
+        "spec_values": [
+          {
+            "id": "161",
+            "show_short_name": "0.2m",
+            "image": ""
+          },
+          {
+            "id": "162",
+            "show_short_name": "1.5m",
+            "image": ""
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000299,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "70",
+            "show_short_name": "灰色",
+            "image": "attr/v2/1000299/B37F37544921114CEF1EC01ED4DF44E4/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000298,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "211",
+            "show_short_name": "透明",
+            "image": "attr/v2/1000298/3555AF9D0704A3AE3ECB7DC7C6866775/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000275,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "36",
+            "show_short_name": "黑色",
+            "image": "attr/v2/1000275/649AD35E36A9703BACBE1555AEB6D266/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000274,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "211",
+            "show_short_name": "透明",
+            "image": "attr/v2/1000274/3555AF9D0704A3AE3ECB7DC7C6866775/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000271,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "35",
+            "show_short_name": "红色",
+            "image": "attr/v2/1000271/948F029DCF134EF23267994487994DA5/"
+          },
+          {
+            "id": "36",
+            "show_short_name": "黑色",
+            "image": "attr/v2/1000271/649AD35E36A9703BACBE1555AEB6D266/"
+          },
+          {
+            "id": "41",
+            "show_short_name": "巧克力色",
+            "image": "attr/v2/1000271/07BAF8C0EF046224A84B593DEEBC869E/"
+          },
+          {
+            "id": "207",
+            "show_short_name": "浅金色",
+            "image": "attr/v2/1000271/52317E0C067C97FC6CE9376A2432CFFF/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000270,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "86",
+            "show_short_name": "银色",
+            "image": "attr/v2/1000270/88DF40EC05F4F2F3F7E8568AEA6A9A8F/"
+          }
+        ]
+      },
+      {
+        "spec_name": "接口",
+        "spec_values": [
+          {
+            "id": "204",
+            "show_short_name": "3.5 mm"
+          },
+          {
+            "id": "205",
+            "show_short_name": "Type-C"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000268,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000268/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000267,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000267/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000266,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000266/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000225,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "37",
+            "show_short_name": "白色",
+            "image": "attr/v2/1000225/E647E77234F9ED0FDE9DD4084D35FF57/"
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  },
+  {
+    "id": 1000223,
+    "sku_info": [
+      {
+        "spec_name": "颜色",
+        "spec_values": [
+          {
+            "id": "35",
+            "show_short_name": "红色",
+            "image": "attr/v2/1000223/16BBDBE3D35C0C4EF56427CBBDD7C4B1/"
+          },
+          {
+            "id": "41",
+            "show_short_name": "咖啡色",
+            "image": "attr/v2/1000223/8E5E24A93E7DA19262F09A33A69DEC8E/"
+          }
+        ]
+      },
+      {
+        "spec_name": "型号",
+        "spec_values": [
+          {
+            "id": "159",
+            "show_short_name": "适用于 Smartisan M1",
+            "image": ""
+          },
+          {
+            "id": "160",
+            "show_short_name": "适用于 Smartisan M1L",
+            "image": ""
+          }
+        ]
+      }
+    ],
+    "image_pre": "http://img01.smartisanos.cn/"
+  }
+]

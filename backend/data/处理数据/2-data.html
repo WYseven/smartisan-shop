@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./data.js"></script>
+		<script>
+
+			let list = data.data.list;
+
+			let newList = list.map((item) => {
+						let {id,name,price,image_pre} = item;
+						let sku_list = [];
+
+						item.sku_info.forEach((item2) => {
+							if(!sku_list.find((item3) => item3.color_id === item2.color_id )){
+								let {direct_to_cart,ali_image,sku_id,sub_title,title,color_id,price} 
+									= item2;
+
+								let spec_json = item2.spec_json.map(function (json_item){
+									let {image,show_name,spec_value_id} = json_item;
+									return 	{image};
+								})
+
+								sku_list.push({direct_to_cart,ali_image,sku_id,sub_title,title,price,...spec_json[0],color_id})
+							}
+						})
+						
+						return {id,name,price,image_pre:'http://img01.smartisanos.cn/',
+							sku_list: sku_list
+						}
+					});
+
+			document.write(JSON.stringify(newList,null,2));
+
+
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+</html>

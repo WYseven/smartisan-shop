@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./data.js"></script>
+		<script>
+
+			let list = data.data.list;
+
+			let newList = list.map((item) => {
+						let {id} = item;
+						let spec_v2 = [];
+
+						let sku_info = item.shop_info.spec_v2.map((item2) => {
+							return {
+									spec_name: item2.spec_name,
+									spec_id: item2.spec_id,
+									spec_values: item2.spec_values.map((item3) => {
+										return {
+											id:item3.id,
+											show_short_name:item3.show_short_name,
+											image:item3.image
+										}
+									})
+								}
+						})
+						
+						return {id,sku_info,image_pre:"http://img01.smartisanos.cn/"}
+					});
+
+			console.log(JSON.stringify(newList,null,2));
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+</html>
