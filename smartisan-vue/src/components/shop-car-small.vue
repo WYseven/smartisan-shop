@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div v-show='!isShowSmallCar'>
     <a href="javascript:;">购物车</a>
     <!--根据class改变颜色-->
     <span class="cart-empty-num cart-num">
@@ -44,10 +44,11 @@
           <div class="nav-cart-total">
             <p>共 <strong class="ng-binding">{{computedCountsAddPric.counts}}</strong> 件商品</p>
             <h5>合计：<span class="price-icon">¥</span>
-              <span class="price-num ng-binding" ng-bind="cartMenu.totalPrice">{{computedCountsAddPric.prices}}</span>
+              <span class="price-num ng-binding" >{{computedCountsAddPric.prices}}</span>
             </h5>
             <h6>
-              <a ng-href="http://www.smartisan.com/shop/#/cart" class="nav-cart-btn" href="http://www.smartisan.com/shop/#/cart">去购物车</a>
+              <!--<a  class="nav-cart-btn" href="http://www.smartisan.com/shop/#/cart"></a>-->
+              <router-link class="nav-cart-btn" :to='{path: "/shop/cart"}'>去购物车</router-link>
             </h6>
           </div>
         </div>
@@ -58,6 +59,16 @@
 
 <script>
 export default {
+  data () {
+    return {
+      isShowSmallCar: true
+    }
+  },
+  watch : {
+    $route(){
+      this.isShowSmallCar = this.$route.name === 'Cart'
+    }
+  },
   computed: {
     smallCart () {
       
