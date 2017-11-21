@@ -13,5 +13,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
     "http-proxy-middleware": "^0.17.4"
+  },
+  "devDependencies": {
+    "request": "^2.83.0"
   }
 }

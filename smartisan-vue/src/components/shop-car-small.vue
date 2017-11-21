@@ -1,5 +1,5 @@
 <template lang="html">
-  <div v-show='!isShowSmallCar'>
+  <div>
     <a href="javascript:;">购物车</a>
     <!--根据class改变颜色-->
     <span class="cart-empty-num cart-num">

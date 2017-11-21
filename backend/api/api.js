@@ -3,10 +3,69 @@ const router = express.Router()
 
 const { getPagesHtml} = require('../lib/utils')
 
+const request = require('request')
 
-const { filterSku} = require('./filter')
 
+const { filterSku,filterListData,filtershopDetails } = require('./filter');
 
+let detailsUrl = `http://www.smartisan.com/product/skus/100027101`;
+
+// 商品详情页
+
+router.get('/shop_details',function (req,res){
+    request.get({
+      url: detailsUrl
+    },function (error,req,body){
+        if(error){
+          res.send({
+            code:1,
+            error: '请求错误',
+            error
+          })
+          }else{
+            
+            // 暂时走不通
+            let b = JSON.parse(body).data;
+
+            res.send({
+              code:1,
+              data:{
+                list: filtershopDetails(b)
+              }
+            })
+          }
+    })
+})
+
+// 获取商品列表数据
+
+let testUrl = `http://www.smartisan.com/product/spus?page_size=20&category_id=60&page=1&sort=sort`
+
+router.get('/shop_list',function (req,res){
+  request.get({
+    url:testUrl,
+    gzip:true,
+    },function (error,req,body){
+      if(error){
+        res.send({
+          code:1,
+          error: '请求错误',
+          error
+        })
+        }else{
+          let b = JSON.parse(body).data.list;
+
+          res.send({
+            code:1,
+            data:{
+              list: filterListData(b)
+            }
+          })
+        }
+  });
+})
+
+// 添加到购物车之后返回商品数据
 router.get('/add_cart', function (req,res) {
   let { skuId = 100036002} = req.query;
   getPagesHtml(`http://www.smartisan.com/product/skus?ids=${skuId}`, {
