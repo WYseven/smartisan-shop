@@ -19,7 +19,7 @@
 								<span class="price">单价</span>
 							</div>
 							<div class="cart-table">
-                <cart-item></cart-item>
+                <cart-item :key="item.id" v-for="item in smallCartAddCounts" :info='item'></cart-item>
 							</div>
 						</div>
 					</div>
@@ -65,7 +65,13 @@
   export default {
     components: {
       CartItem
-    }
+		},
+		computed: {
+			smallCartAddCounts(){
+				let shops = this.$store.getters.smallCartAddCounts
+				return shops
+			}
+		}
   }
 </script>
 <style lang="">

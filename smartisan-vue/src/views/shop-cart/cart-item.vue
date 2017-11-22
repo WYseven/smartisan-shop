@@ -7,34 +7,47 @@
             <span class="blue-checkbox-new checkbox-on"><a></a></span>
           </div>
           <div class="items-thumb">
-            <!--<img src="../assets/img/goods/s1.jpg"> -->
+            <img :src="infoComputed.shop_info.ali_image">
             <a href="javascript:;" target="_blank"></a>
           </div>
           <div class="name hide-row" >
             <div class="name-table">
-              <a href="javascript:;" target="_blank">坚果 Pro 钢化玻璃手感膜 无孔 （后壳用）</a>
+              <a href="javascript:;" target="_blank">{{infoComputed.name}}</a>
               <ul class="attribute">
-                <li>透明</li>
+                <li 
+                  :key="value.spec_value_id" 
+                  v-for="value in infoComputed.shop_info.spec_json"
+                >{{value.show_name}}</li>
               </ul>
             </div>
           </div>
           <div class="operation">
-            <a class="items-delete-btn" ></a>
+            <a class="items-delete-btn"></a>
           </div>
-          <div class="subtotal">¥ 49.00</div>
+          <div class="subtotal">¥ {{infoComputed.price * infoComputed.count}}</div>
           <div class="item-cols-num">
             <div class="select js-select-quantity">
               <span class="down down-disabled">-</span>
-              <span class="num">1</span>
+              <span class="num">{{infoComputed.count}}</span>
               <span class="up">+</span>
               
             </div>
           </div>
-          <div class="price">¥ 49.00</div>
+          <div class="price">¥ {{infoComputed.price}}</div>
         </div>
       </div>
     </div>
 </template>
 <script>
-  export default {}
+  export default {
+    props: ['info'],
+    data: {
+      isCheckedAll: true
+    },
+    computed: {
+      infoComputed () {
+        return this.info
+      }
+    }
+  }
 </script>

@@ -12,7 +12,7 @@
         <ul class="colors-list">
           <li v-for='smallIcon,i in shopItem.sku_list'>
             <a href="javascript:;" :class="{active: i === index}" @mouseenter='index = i'>
-              <img :src="shopItem.image_pre+smallIcon.image+'/20X20.jpg'">
+              <img :src="smallIcon.image">
             </a>
           </li>
         </ul>
