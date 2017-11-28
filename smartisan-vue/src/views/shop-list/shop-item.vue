@@ -78,8 +78,6 @@ export default {
       let skuId = this.sItem.sku_id;
 
       this.$store.dispatch('cartByIdAddCountAction', {skuId})
-
-      // this.$store.dispatch('addCartByIdAction', {skuId})
     }
   }
 }

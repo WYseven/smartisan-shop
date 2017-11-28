@@ -229,14 +229,22 @@
     cursor: pointer;
     user-select: none;
 }
+
+
 .select .down{
   background-position: 0 -60px;
 }
 .select .down:hover{
   background-position: 0 -180px;
 }
-.select .down.down-disabled, .select .down.down-disabled:hover{
+.select .down.down-disabled, .select .down.down-disabled:hover
+{
   background-position: 0 -300px;
+    cursor: not-allowed;
+}
+.select .up.down-disabled, .select .up.down-disabled:hover
+{
+  background-position: 0 -240px;
     cursor: not-allowed;
 }
 .select .num{

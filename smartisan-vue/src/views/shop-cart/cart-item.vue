@@ -4,7 +4,12 @@
       <div class="cart-top-items">
         <div class="cart-items">
           <div class="items-choose">
-            <span class="blue-checkbox-new checkbox-on"><a></a></span>
+            <span 
+              class="blue-checkbox-new" 
+              @mousedown.prevent 
+              @click="checkedHandle" 
+              :class="{'checkbox-on': checked}"
+            ></span>
           </div>
           <div class="items-thumb">
             <img :src="infoComputed.shop_info.ali_image">
@@ -26,12 +31,11 @@
           </div>
           <div class="subtotal">¥ {{infoComputed.price * infoComputed.count}}</div>
           <div class="item-cols-num">
-            <div class="select js-select-quantity">
-              <span class="down down-disabled">-</span>
-              <span class="num">{{infoComputed.count}}</span>
-              <span class="up">+</span>
-              
-            </div>
+            <quantity 
+              :count="infoComputed.count" 
+              :limit-num="infoComputed.shop_info.limit_num"
+              :sku-id='infoComputed.id'
+            ></quantity>
           </div>
           <div class="price">¥ {{infoComputed.price}}</div>
         </div>
@@ -39,14 +43,31 @@
     </div>
 </template>
 <script>
+  import Quantity from '@/components/quantity'
+
   export default {
     props: ['info'],
-    data: {
-      isCheckedAll: true
+    data () {
+      return {
+        itemChecked: true
+      }
+    },
+    components: {
+      Quantity
     },
     computed: {
       infoComputed () {
+        
         return this.info
+      },
+      checked () {
+        return this.itemChecked
+      }
+    },
+    methods: {
+      checkedHandle () {
+        console.log(11111111)
+        this.itemChecked = !this.itemChecked;
       }
     }
   }

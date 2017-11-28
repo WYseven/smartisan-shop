@@ -27,7 +27,12 @@
 						<div class="cart-bar-operation">
 							<div>
 								<div class="choose-all js-choose-all">
-									<span class="blue-checkbox-new checkbox-on"><a></a></span>
+									<span 
+										class="blue-checkbox-new" 
+										@mousedown.prevent 
+										@click.prevent="toggleCheckedAll" 
+										:class="{'checkbox-on':checkedAll}">
+									</span>
 									全选
 								</div>
 								<div class="delete-choose-goods">删除选中的商品</div>
@@ -49,8 +54,7 @@
 									</h4>
 									<h5 class="shipping-tips">
 										应付总额不含运费
-									</h5>
-									
+									</h5>								
 								</div>
 							</div>
 							<span class="jianguo-blue-main-btn big-main-btn js-checkout disabled-btn"><a>现在结算</a></span>
@@ -66,10 +70,25 @@
     components: {
       CartItem
 		},
+		data () {
+			return {
+				checkedAll: true
+			}
+		},
 		computed: {
 			smallCartAddCounts(){
 				let shops = this.$store.getters.smallCartAddCounts
 				return shops
+			},
+			isCheckedAll: {
+				get () {
+					return this.checkedAll
+				}
+			}
+		},
+		methods: {
+			toggleCheckedAll () {
+				this.checkedAll = !this.checkedAll
 			}
 		}
   }

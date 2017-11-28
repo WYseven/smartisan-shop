@@ -36,10 +36,10 @@ let store = new Vuex.Store({
     smallCartAddCounts (state, getters) {
       let smallCart = state.smallCart;
       let cartCounts = getters.cartCountsTransObj;
-      
       smallCart.forEach((item) => {
-        item.count = cartCounts[item.id] && cartCounts[item.id].count || 1
+        Vue.set(item,'count', cartCounts[item.id] && cartCounts[item.id].count || 1)
       })
+      
 
       return smallCart
     },
@@ -94,8 +94,7 @@ let store = new Vuex.Store({
     // 发送商品的数量
     cartByIdAddCountAction({ commit, dispatch, state }, paylod) {
       let skuId = paylod.skuId;
-
-      let item = state.cartCounts.find(item => item.skuId === skuId)
+      let item = state.cartCounts.find(item => item.skuId == skuId)
       let isExist = !!item;
 
       // 这个地方需要重构
@@ -109,7 +108,7 @@ let store = new Vuex.Store({
 
       item = {
         ...item,
-        count: ++item.count
+        count: paylod.minus ? --item.count : ++item.count
       }
       
       dispatch('addShopCountAction', item)

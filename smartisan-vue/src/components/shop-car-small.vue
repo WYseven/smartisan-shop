@@ -5,7 +5,7 @@
     <span class="cart-empty-num cart-num">
       <i>{{computedCountsAddPric.counts}}</i>
     </span>
-    <div class="nav-cart-wrapper">
+    <div class="nav-cart-wrapper" v-show="smallCart.length">
       <div class="nav-cart-list">
         <div class="empty" v-show="!smallCart.length">
           <h3>购物车为空</h3>
@@ -61,12 +61,15 @@
 export default {
   data () {
     return {
-      isShowSmallCar: true
+      isShowSmallCar: false
     }
   },
   watch : {
     $route(){
-      this.isShowSmallCar = this.$route.name === 'Cart'
+      // this.isShowSmallCar = this.$route.name === 'Cart'
+    },
+    smallCart (newValue) {
+      this.isShowSmallCar = true
     }
   },
   computed: {
@@ -78,10 +81,19 @@ export default {
     },
     computedCountsAddPric () {
       return this.$store.getters.computedCountsAddPric;
+    },
+    showSmallCarTime () {
+      setTimeout(() => {
+       // this.isShowSmallCar = true
+      },1000)
+      return this.isShowSmallCar
     }
   },
   created () {
     this.$store.dispatch('getCarShopsLoding')
+  },
+  mounted(){
+    this.isShowSmallCar = false;
   },
   methods: {
     removeShop (skuId) {
