@@ -38,6 +38,7 @@ let store = new Vuex.Store({
       let cartCounts = getters.cartCountsTransObj;
       smallCart.forEach((item) => {
         Vue.set(item,'count', cartCounts[item.id] && cartCounts[item.id].count || 1)
+        Vue.set(item,'checked', true)
       })
       
 

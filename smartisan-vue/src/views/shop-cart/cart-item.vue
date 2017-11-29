@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="operation">
-            <a class="items-delete-btn"></a>
+            <a class="items-delete-btn" @click="removeShop"></a>
           </div>
           <div class="subtotal">¥ {{infoComputed.price * infoComputed.count}}</div>
           <div class="item-cols-num">
@@ -60,14 +60,25 @@
         
         return this.info
       },
-      checked () {
-        return this.itemChecked
+      checked : {
+        get () {
+          return this.infoComputed.checked
+        },
+        set (newValue) {
+          this.infoComputed.checked = newValue
+        }
       }
     },
     methods: {
       checkedHandle () {
-        console.log(11111111)
-        this.itemChecked = !this.itemChecked;
+        
+        this.checked = !this.checked;
+      },
+      removeShop () {
+        // 应该有个弹框提醒
+        this.$store.dispatch('removeCarShopAction', {
+          skuId: this.infoComputed.id
+        })
       }
     }
   }
