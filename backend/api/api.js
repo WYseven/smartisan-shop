@@ -23,7 +23,7 @@ router.get('/shop_details',function (req,res){
             error
           })
           }else{
-            
+
             // 暂时走不通
             let b = JSON.parse(body).data;
 
@@ -68,30 +68,24 @@ router.get('/shop_list',function (req,res){
 // 添加到购物车之后返回商品数据
 router.get('/add_cart', function (req,res) {
   let { skuId = 100036002} = req.query;
-  getPagesHtml(`http://www.smartisan.com/product/skus?ids=${skuId}`, {
+  request.get(`https://www.smartisan.com/product/skus?ids=${skuId}`,{
     headers: {
       Referer: 'http://www.smartisan.com/shop/'
     }
-  })
-  .then((data) => {
-    res.set({
-      'Content-Type': 'text/json'
-      // 'Cache-Control': 'max-age=40000000'  // 设置过期时间
-    })
-    let d = data.toString();
-    
-    res.send(filterSku(d))
-  }).catch((e) => {
-    res.send({
-      code:1,
-      error: '请求错误',
-      e
-    })
+  },function(error,responese,body) {
+    if(error){
+      res.send({
+        code:1,
+        error: '请求错误'
+      })
+    }else{
+      res.send(filterSku(body))
+    }
   })
 })
 
 /**
- * 
+ *
  * 发送商品id和数量，用来记录购买的商品的id和数量
  * 如果没有传入skuId，那么说明是获取
  * {
@@ -123,7 +117,7 @@ router.get('/count', function (req, res) {
       count, skuId
     })
   }
-  
+
   res.send({
     code: 0,
     idsList: shops
@@ -147,5 +141,3 @@ router.get('/remove_ount', function (req, res) {
 
 
 module.exports = router
-
-
