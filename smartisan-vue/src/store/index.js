@@ -84,12 +84,17 @@ let store = new Vuex.Store({
     // 获取商品列表数据
     shopListDataAction ({commit}) {
       shopListMethod().then((data) => {
-        commit('changeShopListValue', data.data)
+        commit('changeShopListValue', {
+          shop_list:data.data.data.list
+        })
       }).catch(error)
     },
     shopItemByIdAction ({ commit }, paylod) {
       shopItemMethod(paylod.id).then((data) => {
-        commit('changeShopItemValue', data.data)
+        console.log(data.data.data)
+        commit('changeShopItemValue', {
+          shop_item:data.data.data
+        })
       }).catch(error)
     },
     // 发送商品的数量

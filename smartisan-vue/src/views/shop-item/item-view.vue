@@ -18,14 +18,15 @@
 								<h6>{{shopItem.shop_info.sub_title}}</h6>
 							</div>
 						</div>
-						<div class="sku-dynamic-params-panel" v-if="shopItem.spec_v2">
+						<div class="sku-dynamic-params-panel" v-if="shopItem.shop_info.spec_v2">
 
-							<div class="sku-dynamic-params clear" v-for="item,index in shopItem.spec_v2">
+							<div class="sku-dynamic-params clear" v-for="item,index in shopItem.shop_info.spec_v2">
 								<span class="params-name">{{item.spec_name}}</span>
 								<ul 
 									:class="{'params-colors':item.spec_id == 1,'params-normal': item.spec_id != 1}">
 									<li 
-										:class="{cur:isIncludeId(spec_values.id)}" 
+										class="disable"
+										:class="{cur:attrInfo[spec_values.spec_id] == spec_values.id}" 
 										v-for='spec_values,index in item.spec_values'
 										@click="spellData(item.spec_id,spec_values.id)"
 									>
@@ -33,7 +34,7 @@
 											<span v-if='item.spec_id != 1'>{{spec_values.show_short_name}}</span>
 											<img 
 												v-if='item.spec_id == 1' 
-												:src="'http://img01.smartisanos.cn/'+spec_values.image+'/20X20.jpg'"
+												:src="spec_values.image"
 											>
 										</a>
 									</li>
@@ -42,17 +43,13 @@
 							<div class="sku-dynamic-params clear">
 								<div class="params-name">数量</div>
 								<div class="params-detail clear">
-									<div class="item-num js-select-quantity">
-										<span class="down down-disabled">-</span>
-										<span class="num">1</span>
-										<span class="up up-disabled">+</span>
-									</div>
+									<quantity></quantity>
 								</div>
 							</div>
 						</div>
 						<div class="sku-status">
 							<div class="cart-operation-wrapper clearfix">
-								<span class="blue-title-btn js-add-cart">加入购物车</span>
+								<span class="blue-title-btn js-add-cart" @click='addCar'>加入购物车</span>
 								<span class="gray-title-btn" @click="nowBuyShop">现在购买</span>
 							</div>
 						</div>
@@ -64,12 +61,14 @@
 
 <script>
 import ItemTab from '@/views/shop-item/item-tab'
+import quantity from '@/components/quantity'
 import {
   getShopItemId
 } from '@/api/api_method'
 export default {
 	components: {
-		ItemTab
+		ItemTab,
+		quantity
 	},
 	computed: {
 		shopItem () {
@@ -77,38 +76,81 @@ export default {
 		},
 		specJson () {
 			return this.shopItem.spec_json || []
+		},
+		skuId () {
+			return this.shopItem.id
+		},
+		attrInfo () {
+			let attr_info = this.shopItem.attr_info
+			let checkedInfo = {}
+			for(let attr in attr_info){
+				/**
+				 * key为类型id
+				 * value为某一项的id
+				*/
+				checkedInfo[attr_info[attr].spec_id] = attr_info[attr].spec_value_id
+			}
+			checkedInfo.length = Object.keys(attr_info).length
+
+			console.log(checkedInfo)
+			
+			return checkedInfo;
 		}
 	},
   created () {
     let id = this.$route.query.id
     this.$store.dispatch('shopItemByIdAction', {id})
 	},
+	watch: {
+		'$route' : function () {
+			let id = this.$route.query.id
+    	this.$store.dispatch('shopItemByIdAction', {id})
+		}
+	},
 	methods: {
-		// 检测那些是被选中的
-		isIncludeId(id){
-			return !!this.specJson.find((item) => {
-				return item.spec_value_id === id
-			})
+		// 检测那些是被选中的,需要颜色的id和自己类型的id
+		isIncludeId(spaecId,id){
+			
+			return this.shopItem.attr_info[spaecId].spec_value_id == id;
+		},
+		computedShopId(){
+
 		},
 		// 点击拼接选中的项，得到对应商品的id
 		spellData(specId,specValuesId){
-			let specItem = this.specJson.find((item) => {
-						return item.spec_id === specId
-					})
-			if(specItem){
-				specItem.spec_value_id = specValuesId
+			this.shopItem.attr_info[specId].spec_value_id = specValuesId
+			let sku_list = this.shopItem.sku_list;
+			let needId = null;
+			
+			a:for(let i = 0; i < sku_list.length; i++){
+				let count = 0;
+				for(let j in this.attrInfo){
+					if(sku_list[i].attr_info[j] && sku_list[i].attr_info[j].spec_value_id == this.attrInfo[j]){
+						count++;
+						if(count == this.attrInfo.length){
+							needId = sku_list[i].id;  // 所需要的id
+							break a;
+						}
+					}else{
+						break;
+					}
+				}
 			}
+			
+			if(needId){
+				this.$router.push({
+					path: '',
+					query: {
+						id: needId
+					}
+				})
+			}
+			
 
-			// 需要根据选中的specJson中的值，去找到对应id，更改地址栏的queryString
-
-			// 找到一类商品的父级id   根据筛选出的条件去匹配这类商品的子级商品
-
-			console.log(this.$route.params) // 一类的父级id
-
-			console.log(this.specJson)
-
-			getShopItemId(this.$route.params, this.specJson)
-
+		},
+		// 加入购物车
+		addCar () {
+			this.$store.dispatch('cartByIdAddCountAction', {skuId: this.skuId})
 		},
 		// 现在购买
 		nowBuyShop () {
@@ -146,5 +188,9 @@ export default {
     border: 0 solid rgba(226,226,226,1);
     border-radius: 3px;
     box-shadow: inset 0 0 0 1px #dbdbdb;
+}
+.params-normal>li.disable a {
+	cursor: not-allowed;
+  opacity: .6;
 }
 </style>

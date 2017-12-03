@@ -79,55 +79,57 @@ function filterListData(data){
 
 exports.filterListData = filterListData;
 
+// 处理详情页的需要的数据
 function filtershopDetails(datas){
-  console.log(datas);
-    let {
-            id,
-            sku_info: {
-              title,
-              sub_title,
-              limit_num,
-              ali_images,
-              ali_image,
-              spec_v2:[]
-            }
-          } = datas;
+  let {
+    code,
+    data : {
+      id,
+      in_stock=true,
+      stock,
+      name,
+      price,
+      spu_id,
+      attr_info,
+      shop_info: {
+        ali_image,
+        ali_images,
+        sub_title,
+        title,
+        spec_json,
+        spec_v2
+      },
+      sku_list 
+    }
+  } = datas;
 
-          let d = {
-            id,
-            spu_id,
-            name,
-            shop_info: {
-              title,
-              sub_title,
-              limit_num,
-              ali_images,
-              ali_image,
-              spec_v2:[]
-            }
-          }
-          d.spec_json =  datas.shop_info.spec_json.map(function (item){
-                return {
-                  spec_id:item.spec_id,
-                  spec_value_id: item.spec_value_id,
-                  show_name:item.show_name
-                }
-              })
-          d.spec_v2 =  datas.shop_info.spec_v2.map((item2) => {
-            return {
-                spec_name: item2.spec_name,
-                spec_id: item2.spec_id,
-                image_pre: item2.image_pre,
-                spec_values: item2.spec_values.map((item3) => {
-                  return {
-                    id:item3.id,
-                    show_short_name:item3.show_short_name,
-                    image:item3.image
-                  }
-                })
-              }
-          })
-    return d;
+  let d = {
+    code,
+    data : {
+      id,
+      in_stock,
+      stock,
+      name,
+      price,
+      spu_id,
+      attr_info,
+      shop_info: {
+        ali_image,
+        ali_images,
+        sub_title,
+        title,
+        spec_json,
+        spec_v2
+      } 
+    }
+  }
+  d.data.sku_list = datas.data.sku_list.map(function(item){
+    let {id,sku_id,attr_info} = item
+    return {id,sku_id,attr_info}
+  })
+   
+
+  return d
 }
 
 exports.filtershopDetails = filtershopDetails;

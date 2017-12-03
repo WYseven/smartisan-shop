@@ -19,7 +19,7 @@ let urls = {
 /* 请求商品列表的方法 */
 
 export function shopListMethod () {
-  return Axios.get(resolvePath(urls.shopListUrl))
+  return Axios.get('http://localhost:5000/api/shop_list')
 }
 
 /**
@@ -27,7 +27,7 @@ export function shopListMethod () {
  */
 
 export function shopItemMethod(id) {
-  return Axios.get(resolvePath(urls.shopItemUrl), { params: { id } })
+  return Axios.get('http://localhost:5000/api/shop_details', { params: { id } })
 }
 
 /**

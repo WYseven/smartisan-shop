@@ -8,38 +8,31 @@ const request = require('request')
 
 const { filterSku,filterListData,filtershopDetails } = require('./filter');
 
-let detailsUrl = `http://www.smartisan.com/product/skus/100027101`;
+let detailsUrl = `https://www.smartisan.com/product/skus/`;
 
 // 商品详情页
 
 router.get('/shop_details',function (req,res){
-    request.get({
-      url: detailsUrl
-    },function (error,req,body){
-        if(error){
-          res.send({
-            code:1,
-            error: '请求错误',
-            error
-          })
-          }else{
-
-            // 暂时走不通
-            let b = JSON.parse(body).data;
-
-            res.send({
-              code:1,
-              data:{
-                list: filtershopDetails(b)
-              }
-            })
-          }
+    let {id} = req.query;
+    console.log(id)
+    let url = detailsUrl + id+'?with_spu_sku=true&with_stock=true';
+    console.log(url)
+    request.get(url, function (error,responese,body) {
+      if(error){
+        
+        return
+      }
+     
+      let d = JSON.parse(body);
+     
+      res.send(filtershopDetails(d))
     })
+    
 })
 
 // 获取商品列表数据
 
-let testUrl = `http://www.smartisan.com/product/spus?page_size=20&category_id=60&page=1&sort=sort`
+let testUrl = `https://www.smartisan.com/product/spus?page_size=20&category_id=60&page=1&sort=sort`
 
 router.get('/shop_list',function (req,res){
   request.get({
