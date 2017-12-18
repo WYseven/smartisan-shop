@@ -94,6 +94,7 @@ function filtershopDetails(datas){
       shop_info: {
         ali_image,
         ali_images,
+        limit_num,
         sub_title,
         title,
         spec_json,
@@ -116,6 +117,7 @@ function filtershopDetails(datas){
       shop_info: {
         ali_image,
         ali_images,
+        limit_num,
         sub_title,
         title,
         spec_json,

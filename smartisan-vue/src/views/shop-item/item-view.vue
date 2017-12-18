@@ -43,7 +43,11 @@
 							<div class="sku-dynamic-params clear">
 								<div class="params-name">数量</div>
 								<div class="params-detail clear">
-									<quantity></quantity>
+									<div class="select js-select-quantity">
+										<span class="down down-disabled" @click="musi">-</span> 
+										<span class="num">{{count}}</span> 
+										<span class="up" @click="add">+</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -66,6 +70,11 @@ import {
   getShopItemId
 } from '@/api/api_method'
 export default {
+	data () {
+		return {
+			count: 1
+		}
+	},
 	components: {
 		ItemTab,
 		quantity
@@ -108,6 +117,12 @@ export default {
 		}
 	},
 	methods: {
+		musi (){
+			this.count--;
+		},
+		add () {
+			this.count++;
+		},
 		// 检测那些是被选中的,需要颜色的id和自己类型的id
 		isIncludeId(spaecId,id){
 			
@@ -150,7 +165,14 @@ export default {
 		},
 		// 加入购物车
 		addCar () {
-			this.$store.dispatch('cartByIdAddCountAction', {skuId: this.skuId})
+			let item = this.$store.state.smallCart.find(item => item.id == this.skuId)
+			if(item){
+				if(parseInt(item.count) + this.count > this.shopItem.shop_info.limit_num) {
+					alert('超过最大值')
+					return;
+				}
+			}
+			this.$store.dispatch('cartByIdAddCountAction', {skuId: this.skuId,count:this.count})
 		},
 		// 现在购买
 		nowBuyShop () {

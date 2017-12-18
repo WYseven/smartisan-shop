@@ -3,7 +3,7 @@ import Axios from 'axios'
 // 存放所有商品的id，可以把这一块放在后端
 import ids from './mock-ids'
 
-let baseUrl = 'https://www.easy-mock.com/mock/5a017c1debd5c518f747ca27/'
+let baseUrl = 'http://118.89.226.84:8080'
 
 // 拼接地址
 function resolvePath (path) {
@@ -19,7 +19,7 @@ let urls = {
 /* 请求商品列表的方法 */
 
 export function shopListMethod () {
-  return Axios.get('http://localhost:5000/api/shop_list')
+  return Axios.get(baseUrl+'/api/shop_list')
 }
 
 /**
@@ -27,7 +27,7 @@ export function shopListMethod () {
  */
 
 export function shopItemMethod(id) {
-  return Axios.get('http://localhost:5000/api/shop_details', { params: { id } })
+  return Axios.get(baseUrl+'/api/shop_details', { params: { id } })
 }
 
 /**
@@ -53,7 +53,7 @@ export function addShopCountMethod(obj) {
   
     // 暂无接口
     
-    return Axios.get('http://localhost:5000/api/count', { params: {...obj}})
+    return Axios.get(baseUrl+'/api/count', { params: {...obj}})
   }
 
 /**
@@ -64,7 +64,7 @@ export function addCartByIdMethod(skuId='') {
   
     // 暂无接口
   
-    return Axios.get('http://localhost:5000/api/add_cart', { params: {skuId}})
+    return Axios.get(baseUrl+'/api/add_car', { params: {skuId}})
   }
 
   /**
@@ -75,5 +75,5 @@ export function removeCarShopByIdMethod(skuId='') {
   
     // 暂无接口
   
-    return Axios.get('http://localhost:5000/api/remove_ount', { params: {skuId}})
+    return Axios.get(baseUrl+'/api/remove_count', { params: {skuId}})
   }
