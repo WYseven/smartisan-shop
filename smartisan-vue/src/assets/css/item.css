@@ -61,7 +61,7 @@ item-box img{
     bottom: 0;
     display: none;
     opacity: 0;
-    text-align: center;\
+    text-align: center;
     user-select: none;
 }
 .thumb li.on{

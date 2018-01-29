@@ -108,14 +108,23 @@ let store = new Vuex.Store({
       if (!item){  // 存在说明已经发过了 只需要告诉后端商品和数量
         item = {
           skuId,
-          count: 0
+          count: paylod.count || 0
+        }
+      }else {
+        item = {
+          skuId,
+          count: paylod.count ? parseInt(item.count) + parseInt(paylod.count) : paylod.count
         }
       }
 
-      item = {
-        ...item,
-        count: paylod.minus ? --item.count : ++item.count
+      if(!paylod.count){
+        item = {
+          ...item,
+          count: paylod.minus ? --item.count : ++item.count
+        }
       }
+
+      
       
       dispatch('addShopCountAction', item)
       .then((data) => {
