@@ -9,6 +9,8 @@ import Cart from '@/views/shop-cart/cart'
 
 import Checkout from '@/views/checkout/checkout'
 
+
+
 Vue.use(Router)
 
 export default new Router({

@@ -31,7 +31,7 @@
           </div>
           <div class="subtotal">¥ {{infoComputed.price * infoComputed.count}}</div>
           <div class="item-cols-num">
-            <quantity 
+            <quantity
               :count="infoComputed.count" 
               :limit-num="infoComputed.shop_info.limit_num"
               :sku-id='infoComputed.id'
