@@ -14,4 +14,6 @@ app.use((req, res, next) => {
 
 app.use('/api', require('./api/api'))
 
-app.listen(5000)
+app.listen(5000,function (){
+	console.log('服务开启成功');	
+})

@@ -14,59 +14,34 @@ let detailsUrl = baseURL+ `/skus/`;
 
 // 商品详情页
 
-router.get('/shop_skus',function (req,res){
-  let {ids='',with_spu_sku=true,with_stock=true} = req.query;
-  request.get({
-      url: detailsUrl,
-      method: 'get',
-      qs: {
-        ids:ids,
-        with_spu_sku,
-        with_stock
-      }
-    }, function (error,responese,body) {
+router.get('/shop_details',function (req,res){
+    let {id} = req.query;
+    console.log(id)
+    let url = detailsUrl + id+'?with_spu_sku=true&with_stock=true';
+    console.log(url)
+    request.get(url, function (error,responese,body) {
       if(error){
-        res.send({
-          code:1,
-          error: '请求错误'
-        })
+        
         return
       }
-
-      let b = JSON.parse(body);
-      if(b.code === 400 || b.code === 500){
-        res.send(b)
-        return;
-      }
-      res.send(filterSku(b))
-  })
+     
+      let d = JSON.parse(body);
+     
+      res.send(filtershopDetails(d))
+    })
     
 })
 
 // 获取商品列表数据
 
-let shopListUrl = baseURL +`/spus`
-router.get('/shop_list',function (req,res){
-  let {
-      page_size=20,
-      page=1,
-      category_id=60,
-      sort="sort"
-    } = req.query;
+let shopListUrl = baseURL +
+              `/spus?page_size=20&category_id=60&page=1&sort=sort`
 
-  request.get(
-    {
-      method: 'get',
-      url:shopListUrl,
-      gzip:true,
-      qs: {
-        page_size,
-        page,
-        category_id,
-        sort
-      }
-    },
-    function (error,req,body){
+router.get('/shop_list',function (req,res){
+  request.get({
+    url:shopListUrl,
+    gzip:true,
+    },function (error,req,body){
       if(error){
         res.send({
           code:1,
@@ -74,19 +49,13 @@ router.get('/shop_list',function (req,res){
           error
         })
         }else{
-          let b = JSON.parse(body);
+          let b = JSON.parse(body).data.list;
 
-          if(b.code === 400){
-            res.send(b)
-            return;
-          }
-
-          let list = b.data.list;
           res.send({
             code:1,
             msg: '请求成功',
             data:{
-              list: filterListData(list)
+              list: filterListData(b)
             }
           })
         }

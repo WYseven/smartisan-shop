@@ -28,6 +28,7 @@
               <a href="javascript:;" target="_blank">查看详情</a>
             </span>
             <span class="item-blue-btn">加入购物车 </span>
+            <span class="item-disabled-btn">已售罄 </span>
           </div>
           <div class="item-price clearfix">
             <i>¥</i>

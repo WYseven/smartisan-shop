@@ -229,6 +229,10 @@
   width: 61px;
 }
 
+.nav-cart:hover .nav-cart-wrapper {
+  display: block
+}
+
 .nav-cart>a {
   display: block;
   position: absolute;

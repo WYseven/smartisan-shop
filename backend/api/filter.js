@@ -2,7 +2,7 @@
 function getInfo (obj) {
   let {
     id,
-    in_stock = true,
+    in_stock,
     name,
     price,
     spu_id,
@@ -38,7 +38,6 @@ function getListInfo (list) {
 }
 
 function filterSku(d) {
-  d = JSON.parse(d);
   return {
     code: d.code,
     data: {
@@ -62,6 +61,9 @@ function filterListData(data){
         if(!sku_list.find((item3) => item3.color_id === item2.color_id )){
           let {direct_to_cart,ali_image,sku_id,sub_title,title,color_id,price} 
             = item2;
+            if(item2.color_id === ''){
+              direct_to_cart = false;
+            }
           let spec_json = item2.spec_json.map(function (json_item){
             let {image,show_name,spec_value_id} = json_item;
             return  {image};
@@ -78,6 +80,7 @@ function filterListData(data){
 }
 
 exports.filterListData = filterListData;
+
 
 // 处理详情页的需要的数据
 function filtershopDetails(datas){
@@ -129,8 +132,6 @@ function filtershopDetails(datas){
     let {id,sku_id,attr_info} = item
     return {id,sku_id,attr_info}
   })
-   
-
   return d
 }
 
