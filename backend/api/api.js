@@ -115,18 +115,18 @@ router.get('/add_cart', function (req,res) {
 /**
  *
  * 发送商品id和数量，用来记录购买的商品的id和数量
- * 如果没有传入skuId，那么说明是获取
+ * 如果没有传入id，那么说明是获取
  * {
- *  skuId:
- *  count:
+ *  	id:
+ *  	count:
  * }
  */
 
  let shops = [];
 
-router.get('/count', function (req, res) {
+router.get('/add_count', function (req, res) {
 
-  if(!("skuId" in req.query)){
+  if(!("id" in req.query)){
     res.send({
       code: 0,
       idsList: shops
@@ -153,7 +153,7 @@ router.get('/count', function (req, res) {
 })
 
 // 根据id移除购物车商品
-router.get('/remove_ount', function (req, res) {
+router.get('/remove_shop', function (req, res) {
     let {skuId} = req.query;
 
     shops = shops.filter((item) => {

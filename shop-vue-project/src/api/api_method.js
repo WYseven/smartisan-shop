@@ -34,3 +34,4 @@ export function getShopList(params = { page_size: 20, page: 1 }) {
 export function getShopInfoByIds(params = { ids: '', with_stock: true }) {
   return instance.get('/shop_skus', { params: params })
 }
+

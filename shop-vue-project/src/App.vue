@@ -24,6 +24,19 @@
 <script>
 import CustomHeader from '@/components/header/header'
 export default {
+  watch:{
+    $route:{
+      handler(){
+        // 判断是不是购物车，是购物车小购物车要隐藏
+         this.$store.commit('updateCar',{show: this.$route.name !== 'car'})
+      },
+      immediate: true
+    },
+    '$store.state.smallCarList'(){
+      console.log('存入localStorage')
+      localStorage.setItem('miaov-shop',JSON.stringify(this.$store.state.smallCarList))
+    }
+  },
   components: {
     CustomHeader
   },

@@ -79,7 +79,7 @@ import { getShopInfoByIds } from '@/api/api_method'
         if(this.shopInfo.length){
           this.currentShopInfo = this.shopInfo.filter((item) => {
             return item.id == this.currentList.sku_id;
-          })[0]
+          })[0];
           return this.currentShopInfo.in_stock
         }
         return true;
@@ -97,8 +97,13 @@ import { getShopInfoByIds } from '@/api/api_method'
       addCar () {
         let smallCarList = this.$store.state.smallCarList;
         let item = smallCarList.find(item => item.id === this.currentShopInfo.id)
+        // 判断是否已经到最大购买数量
         if(item && item.count >= this.currentShopInfo.shop_info.limit_num){
           return;
+        }
+        // 给加入购物车的对象，添加上选中的标识，在购物车中使用
+        if(!this.currentShopInfo.checked){
+          this.currentShopInfo.checked = true;
         }
         this.$store.commit('updatedSmallCarList', {
           list: this.currentShopInfo
