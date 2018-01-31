@@ -21,7 +21,7 @@ export default new Router({
       component: ShopCar
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: shopDetails
     }

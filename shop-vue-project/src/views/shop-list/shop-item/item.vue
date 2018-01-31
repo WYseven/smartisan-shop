@@ -20,7 +20,8 @@
     </div>
     <div class="item-btns clearfix">
       <span class="item-gray-btn">
-        <a href="javascript:;" target="_blank">查看详情</a>
+        <a href="javascript:;" @click="seeDetail" target="_blank">查看详情</a>
+        
       </span>
       <span 
         class="item-blue-btn" 
@@ -88,6 +89,12 @@ import { getShopInfoByIds } from '@/api/api_method'
     methods: {
       tabList (index) {
         this.currentIndex = index;
+      },
+      // 查看详情
+      seeDetail () {
+        this.$router.push({
+          path: '/detail/' + this.currentList.sku_id
+        });
       },
       getShopInfo () {
         getShopInfoByIds({ ids: this.ids.join()}).then((res) => {

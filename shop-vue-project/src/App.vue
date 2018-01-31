@@ -1,20 +1,6 @@
 <template>
   <div id="app">
     <custom-header></custom-header>
-    <div class="sort-option" >
-      <ul class="line clear" style="padding-left:30%;">
-        <li><a href="javascript:;" class="active">测试跳转：</a></li>
-        <router-link to="/" tag="li">
-          <a>商品列表页</a>
-        </router-link>
-        <router-link to="/detail" tag="li">
-          <a>商品详情页</a>
-        </router-link>
-        <router-link to="/car" tag="li">
-          <a>购物车页</a>
-        </router-link>
-      </ul>
-    </div>
     <div class="main">
       <router-view/>
     </div>
