@@ -9,6 +9,7 @@
 
 <script>
 import CustomHeader from '@/components/header/header'
+
 export default {
   watch:{
     $route:{
@@ -19,7 +20,6 @@ export default {
       immediate: true
     },
     '$store.state.smallCarList'(){
-      console.log('存入localStorage')
       localStorage.setItem('miaov-shop',JSON.stringify(this.$store.state.smallCarList))
     }
   },
@@ -34,7 +34,7 @@ export default {
 .main {
   padding-top: 20px;
 }
-
+/* 
 .sort-option{
     border-top: 1px solid #D8D8D8;
     color: #999;
@@ -72,6 +72,9 @@ export default {
 }
 .sort-option a.active, .sort-option a:hover{
     color: #5683EA;
+} */
+.nav-global .nav-list .router-link-active {
+  color: #fff;
 }
 </style>
 

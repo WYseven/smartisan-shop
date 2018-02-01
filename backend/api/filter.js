@@ -1,47 +1,51 @@
 
-function getInfo (obj) {
+function getInfo (obj,with_spu) {
   let {
     id,
     in_stock,
     name,
     price,
     spu_id,
+    attr_info,
     shop_info: {
       limit_num,
       ali_image,
+      ali_images,
       sub_title,
       title,
       spec_json
     }
   } = obj;
-
-  return {
+  let o = {
     id,
     in_stock,
     name,
     price,
     spu_id,
+    attr_info,
     shop_info: {
       limit_num,
       ali_image,
+      ali_images,
       sub_title,
       title,
       spec_json
     }
   }
+  return o;
 }
 
-function getListInfo (list) {
+function getListInfo (list,with_spu) {
   return list.map((item) => {
-    return getInfo(item)
+    return getInfo(item,with_spu)
   })
 }
 
-function filterSku(d) {
+function filterSku(d,with_spu) {
   return {
     code: d.code,
     data: {
-      list: getListInfo(d.data.list)
+      list: getListInfo(d.data.list,with_spu)
     }
   }
 }

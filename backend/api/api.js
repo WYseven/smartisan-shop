@@ -12,23 +12,24 @@ const { filterSku,filterListData,filtershopDetails } = require('./filter');
 
 let detailsUrl = baseURL+ `/skus/`;
 
-// 商品详情页
+// 商品列表
 
 router.get('/shop_skus',function (req,res){
-  let {ids='',with_spu_sku=true,with_stock=true} = req.query;
+  let {ids='',with_spu=false,with_stock=true} = req.query;
   request.get({
       url: detailsUrl,
       method: 'get',
       qs: {
         ids:ids,
-        with_spu_sku,
+        with_spu,
         with_stock
       }
     }, function (error,responese,body) {
       if(error){
         res.send({
           code:1,
-          error: '请求错误'
+          msg: '请求错误',
+          error
         })
         return
       }
@@ -38,9 +39,37 @@ router.get('/shop_skus',function (req,res){
         res.send(b)
         return;
       }
-      res.send(filterSku(b))
+      res.send(filterSku(b,with_spu))
   })
-    
+})
+
+// 商品详情
+
+let detailUrl = `https://www.smartisan.com/product/skus/`;
+
+// 商品详情页
+
+router.get('/shop_detail',function (req,res){
+    let {id} = req.query;
+    let url = detailUrl + id+'?with_spu_sku=true&with_stock=true';
+    request.get(
+    {
+      url: url
+    }, function (error,responese,body) {
+    if(error){
+        res.send({
+          code:1,
+          msg: '请求错误',
+          error
+        })
+        return
+    }
+
+    let d = JSON.parse(body);
+
+    res.send(filtershopDetails(d))
+    })
+
 })
 
 // 获取商品列表数据
@@ -50,7 +79,7 @@ router.get('/shop_list',function (req,res){
   let {
       page_size=20,
       page=1,
-      category_id=60,
+      id:category_id=60,
       sort="sort"
     } = req.query;
 

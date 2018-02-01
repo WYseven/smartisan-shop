@@ -126,16 +126,37 @@ item-box img{
     color: #8d8d8d;
     line-height: 36px;
 }
-.item-box .banner .sku-dynamic-params .params-colors{
+.item-box .banner .sku-dynamic-params .params-colors,
+.item-box .banner .sku-dynamic-params .params-block{
 	float: left;
     line-height: 36px;
     margin: -10px 0 0 -10px;
     width: 402px;
 }
-.item-box .banner .sku-dynamic-params .params-colors>li{
+.item-box .banner .sku-dynamic-params .params-colors>li,
+.item-box .banner .sku-dynamic-params .params-block>li {
 	float: left;
     margin: 10px 0 0 10px;
 }
+
+.item-box .banner .sku-dynamic-params .params-block>li span {
+    display: block;
+    width: auto;
+    padding: 0 20px;
+    margin: 5px 10px 5px 0;
+    float: left;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.item-box .banner .sku-dynamic-params .params-block>li.cur span {
+    color: #999;
+    border: 1px solid #6a8fe6;
+    transition: none;
+    box-shadow: none;
+}
+
 .item-box .banner .sku-dynamic-params .params-colors>li span{
 	display: block;
     width: 26px;
@@ -145,12 +166,19 @@ item-box img{
     text-align: center;
     color: #757575;
     border-radius: 50%;
+    cursor: pointer;
 }
 .item-box .banner .sku-dynamic-params .params-colors>li.cur span{
 	border-color: #B2B2B2;
     box-shadow: inset 0 0 0 1px #B2B2B2;
 }
-.item-box .banner .sku-dynamic-params .params-colors>li i, .item-box .banner .sku-dynamic-params .params-colors>li img{
+.item-box .banner .sku-dynamic-params li.disable span{
+    cursor: not-allowed;
+    opacity: .6;
+    
+}
+.item-box .banner .sku-dynamic-params .params-colors>li i, 
+.item-box .banner .sku-dynamic-params .params-colors>li img{
     position: relative;
     display: block;
     width: 100%;
@@ -294,4 +322,12 @@ item-box img{
 .item-box .gray-title-btn:hover{
 	transition: all .15s ease-out;
     background: linear-gradient(#f6f6f6,#ededed);
+}
+
+.item-box .item-disabled-btn {
+    background: linear-gradient(#f6f6f6,#ededed);
+    border: 1px solid #b6b6b6;
+    color: #8c8c8c;
+    margin-left: 10px;
+    cursor: not-allowed;
 }

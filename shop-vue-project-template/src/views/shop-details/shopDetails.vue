@@ -36,6 +36,7 @@
           </div>
         </div>
         <div class="sku-dynamic-params-panel">
+          <!--各种颜色、尺寸、型号-->
           <div class="sku-dynamic-params clear">
             <span class="params-name">颜色</span>
             <ul class="params-colors">
@@ -46,6 +47,17 @@
               </li>
             </ul>
           </div>
+           <div class="sku-dynamic-params clear">
+            <span class="params-name">尺码选择</span>
+            <ul class="params-block">
+              <li class="cur">
+                <span>
+                  XXL
+                </span>
+              </li>
+            </ul>
+          </div>
+          
           <div class="sku-dynamic-params clear">
             <div class="params-name">数量</div>
             <div class="params-detail clear">

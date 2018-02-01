@@ -8,9 +8,14 @@ export default {
       list: []
     }
   },
-  created () {
-    getShopList({page:1}).then((res) => {
-      this.list = res.data.data.list;
-    })
+  watch: {
+    $route: {
+      handler() {
+        getShopList({ page: 1, id: this.$route.query.id }).then((res) => {
+          this.list = res.data.data.list;
+        })
+      },
+      immediate: true
+    }
   }
 }

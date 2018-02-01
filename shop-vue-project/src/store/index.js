@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 let smallCarList = JSON.parse(localStorage.getItem('miaov-shop')) || []
-console.log(smallCarList)
 export default new Vuex.Store({
   state: {
     smallCarList: smallCarList,

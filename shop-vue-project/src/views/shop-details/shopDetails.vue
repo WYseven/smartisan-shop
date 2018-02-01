@@ -2,65 +2,64 @@
   <div class="store-content item">
     <div class="item-box">
       <!--左侧轮播-->
-      <div class="gallery-wrapper">
-        <div class="gallery">
-          <div class="thumbnail">
-            <ul>
-              <li class="on"><img src="../../assets/img/goods/ss1.jpg"></li>
-              <li><img src="../../assets/img/goods/ss2.jpg"></li>
-              <li><img src="../../assets/img/goods/ss3.jpg"></li>
-              <li><img src="../../assets/img/goods/ss4.jpg"></li>
-              <li><img src="../../assets/img/goods/ss5.jpg"></li>
-            </ul>
-          </div>
-          <div class="thumb">
-            <ul>
-              <li class="on"><img src="../../assets/img/goods/b1.png"></li>
-              <li><img src="../../assets/img/goods/b1.png"></li>
-              <li><img src="../../assets/img/goods/b1.png"></li>
-              <li><img src="../../assets/img/goods/b1.png"></li>
-              <li><img src="../../assets/img/goods/b1.png"></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <tab :imgs="ali_images"></tab>
       <!--右侧信息-->
       <div class="banner">
         <div class="sku-custom-title">
           <div class="params-price">
-            <span><em>¥</em><i>199</i></span>
+            <span><em>¥</em><i>{{shopInfo.price}}</i></span>
           </div>
           <div class="params-info">
-            <h4>Smartisan 快充移动电源 10000mAh</h4>
-            <h6>10000mAh 双向快充、轻盈便携、高标准安全保护</h6>
+            <h4>{{shop_info.title}}</h4>
+            <h6>{{shop_info.sub_title}}</h6>
           </div>
         </div>
         <div class="sku-dynamic-params-panel">
-          <div class="sku-dynamic-params clear">
-            <span class="params-name">颜色</span>
-            <ul class="params-colors">
-              <li class="cur">
-                <span>
-                  <img src="http://img01.smartisanos.cn/attr/v2/1000299/B37F37544921114CEF1EC01ED4DF44E4/20X20.jpg">
+          <!--各种颜色、尺寸、型号-->
+          <div class="sku-dynamic-params clear" v-for="item in spec_v2" :key="item.spec_id">
+            <span class="params-name">{{item.spec_name}}</span>
+            <ul :class="{'params-colors': item.spec_id == 1,'params-block': item.spec_id != 1}">
+              <li 
+                :class="{cur: curClass(option.id),disable: !getCombId(item.spec_id, option) }"
+                v-for="option in item.spec_values" 
+                :key="option.id"
+                @click="getShopInfoMethod(option)"
+              >
+                <span v-if="item.spec_id == 1">
+                  <img :src="option.image">
+                </span>
+                <span v-else>
+                  {{option.show_name}}
                 </span>
               </li>
             </ul>
-          </div>
+          </div><!-- 
+           <div class="sku-dynamic-params clear"  v-if="item.spec_id != 1" v-for="item in spec_v2" :key="item.spec_id">
+            <span class="params-name">{{item.spec_name}}</span>
+            <ul class="params-block">
+              <li :class="{cur: curClass(option.id)}" v-for="option in item.spec_values" :key="option.id">
+                  {{option.show_name}}
+              </li>
+            </ul>
+          </div> -->
+
           <div class="sku-dynamic-params clear">
             <div class="params-name">数量</div>
             <div class="params-detail clear">
               <div class="item-num js-select-quantity">
-                <span class="down down-disabled">-</span>
-                <span class="num">1</span>
-                <span class="up up-disabled">+</span>
+                <span class="down" :class="{'down-disabled': downDisabled}" @click="minus">-</span>
+                <span class="num">{{count}}</span>
+                <span class="up" :class="{'up-disabled': upDisabled}" @click="add">+</span>
               </div>
             </div>
           </div>
         </div>
         <div class="sku-status">
           <div class="cart-operation-wrapper clearfix">
-            <span class="blue-title-btn js-add-cart">加入购物车</span>
-            <span class="gray-title-btn">现在购买</span>
+            <span class="blue-title-btn js-add-cart" v-if="shopInfo.in_stock" @click="addCar">加入购物车</span>
+            <span class="gray-title-btn" v-if="shopInfo.in_stock">现在购买</span>
+
+            <span class="gray-title-btn item-disabled-btn" v-if="!shopInfo.in_stock">已售罄 </span>
           </div>
         </div>
       </div>
