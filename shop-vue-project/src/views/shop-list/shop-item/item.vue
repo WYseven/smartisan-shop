@@ -20,7 +20,7 @@
     </div>
     <div class="item-btns clearfix">
       <span class="item-gray-btn">
-        <a href="javascript:;" target="_blank">查看详情</a>
+        <a href="javascript:;" @click="seeDetail" target="_blank">查看详情</a>
       </span>
       <span 
         class="item-blue-btn" 
@@ -30,7 +30,7 @@
 
       <span 
         class="item-disabled-btn" 
-        v-if="!inStock"
+        v-if="!inStock && currentList.direct_to_cart"
       >已售罄 </span>
     </div>
     <div class="item-price clearfix">
@@ -107,6 +107,11 @@ import { getShopInfoByIds } from '@/api/api_method'
         }
         this.$store.commit('updatedSmallCarList', {
           list: this.currentShopInfo
+        })
+      },
+      seeDetail () {  // 查看详情
+        this.$router.push({
+          path: '/detail/'+this.currentList.sku_id,
         })
       }
     }

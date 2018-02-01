@@ -12,6 +12,16 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Home',
+      redirect: {
+        path: '/list',
+        query:{
+          id: 60
+        }
+      }
+    },
+    {
+      path: '/list',
       name: 'ShopList',
       component: ShopList
     },
@@ -21,7 +31,7 @@ export default new Router({
       component: ShopCar
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: shopDetails
     }

@@ -9,6 +9,7 @@
           <!--active-->
           <small-car></small-car>
         </ul>
+        
         <ul class="nav-list">
           <li><a href="http://miaov.com/">首页</a></li>
           <li><a href="http://miaov.com/index.php/Course/courseList">课程</a></li>
@@ -16,22 +17,22 @@
           <li><a href="http://2017.miaov.com/study/remote/index">尊享视频</a></li>
           <li><a href="http://2017.miaov.com/bbs">社区</a></li>
           <li><a href="http://www.miaov.com/index.php/example/exampleList">学员作品</a></li>
-          <li><a href="javascript:;">在线商城</a></li>
+          <li><router-link to="/list?id=60">在线商城</router-link></a></li>
         </ul>
       </div>
     </div>
-    <div class="nav-sub" style="display: none;">
+    <div class="nav-sub" v-show='hide'>
       <div class="nav-sub-wrapper">
         <div class="container">
-          <ul class="nav-list">
-            <li><a href="javascript:;">首页</a></li>
-            <li><a href="javascript:;">手机</a></li>
-            <li><a href="javascript:;">“足迹系列”手感膜</a></li>
-            <li class="active"><a href="javascript:;">官方配件</a></li>
-            <li><a href="javascript:;">周边产品</a></li>
-            <li><a href="javascript:;">第三方配件</a></li>
-            <li><a href="javascript:;">全部商品</a></li>
-            <li><a href="javascript:;">服务</a></li>
+          <ul class="nav-list" :a='$route.name'>
+            <router-link 
+              :class="{active: $route.query.id == item.query.id}" 
+              :a="item.name"
+              v-for="item in navDate" 
+              :key="item.query.id" :to="item" tag="li"
+            >
+              <a>{{item.title}}</a>
+            </router-link>
           </ul>
         </div>
       </div>
@@ -39,8 +40,46 @@
   </div>
 </template>
 <script>
+let navDate = [
+  {
+    name: 'ShopList',
+    query: {id:62},
+    title: '全部'
+  },
+  {
+    name: 'ShopList',
+    query: {id:69},
+    title: '品牌周边'
+  },
+  {
+    name: 'ShopList',
+    query: {id:61},
+    title: '第三方商品'
+  },
+  {
+    name: 'ShopList',
+    query: {id:60},
+    title: '官方配件'
+  }
+]
   import smallCar from './small-car/smallCar'
   export default {
+    data () {
+      return {
+        navDate,
+        hideNavName: ['car'],
+        hide: false
+      }
+    },
+    watch: {
+      $route: {
+      handler() {
+         let name = this.$route.name;
+         this.hide = this.hideNavName.indexOf(name) === -1;
+      },
+      immediate: true
+      }
+    },
     components: {
       smallCar
     }

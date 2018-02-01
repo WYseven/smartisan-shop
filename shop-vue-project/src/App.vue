@@ -1,20 +1,6 @@
 <template>
   <div id="app">
     <custom-header></custom-header>
-    <div class="sort-option" >
-      <ul class="line clear" style="padding-left:30%;">
-        <li><a href="javascript:;" class="active">测试跳转：</a></li>
-        <router-link to="/" tag="li">
-          <a>商品列表页</a>
-        </router-link>
-        <router-link to="/detail" tag="li">
-          <a>商品详情页</a>
-        </router-link>
-        <router-link to="/car" tag="li">
-          <a>购物车页</a>
-        </router-link>
-      </ul>
-    </div>
     <div class="main">
       <router-view/>
     </div>
@@ -23,6 +9,7 @@
 
 <script>
 import CustomHeader from '@/components/header/header'
+
 export default {
   watch:{
     $route:{
@@ -33,7 +20,6 @@ export default {
       immediate: true
     },
     '$store.state.smallCarList'(){
-      console.log('存入localStorage')
       localStorage.setItem('miaov-shop',JSON.stringify(this.$store.state.smallCarList))
     }
   },
@@ -48,7 +34,7 @@ export default {
 .main {
   padding-top: 20px;
 }
-
+/* 
 .sort-option{
     border-top: 1px solid #D8D8D8;
     color: #999;
@@ -86,6 +72,9 @@ export default {
 }
 .sort-option a.active, .sort-option a:hover{
     color: #5683EA;
+} */
+.nav-global .nav-list .router-link-active {
+  color: #fff;
 }
 </style>
 

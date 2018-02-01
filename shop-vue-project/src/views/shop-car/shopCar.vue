@@ -28,11 +28,14 @@
                     <span class="blue-checkbox-new" @click="toggle(item)" :class="{'checkbox-on': item.checked}"><a></a></span>
                   </div>
                   <div class="items-thumb">
-                    <img :src="item.shop_info.ali_image">
+                    
+                    <router-link :to="'/detail/'+item.id">
+                      <img :src="item.shop_info.ali_image">
+                    </router-link>
                   </div>
                   <div class="name hide-row" >
                     <div class="name-table">
-                      <a href="#/item/100027401">{{item.shop_info.title}}</a>
+                      <router-link :to="'/detail/'+item.id">{{item.shop_info.title}}</router-link>
                       <ul class="attribute">
                         <li v-for='option in  item.shop_info.spec_json' :key="option.spec_id">
                           {{option.show_name}}
