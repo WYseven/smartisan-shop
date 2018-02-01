@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import ShopList from '@/views/shop-list/shopList'
-import ShopCar from '@/views/shop-car/ShopCar'
-import shopDetails from '@/views/shop-details/shopDetails'
+const ShopList = () => import('@/views/shop-list/shopList')
+const ShopCar = () => import('@/views/shop-car/ShopCar') 
+const shopDetails = () => import('@/views/shop-details/shopDetails')
 
 Vue.use(Router)
 
@@ -16,7 +16,7 @@ export default new Router({
       redirect: {
         path: '/list',
         query:{
-          id: 60
+          id: 62
         }
       }
     },
