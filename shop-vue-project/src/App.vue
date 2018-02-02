@@ -1,20 +1,24 @@
 <template>
   <div id="app">
     <custom-header></custom-header>
+    
     <div class="main">
-      <router-view/>
+      <loading v-show="$store.state.loading"></loading>
+      <router-view  v-show="!$store.state.loading"/>
     </div>
   </div>
 </template>
 
 <script>
 import CustomHeader from '@/components/header/header'
+import loading from '@/components/loading/loading'
 
 export default {
   watch:{
     $route:{
       handler(){
         // 判断是不是购物车，是购物车小购物车要隐藏
+         this.$store.commit('updateLoading',{loading:true})
          this.$store.commit('updateCar',{show: this.$route.name !== 'car'})
       },
       immediate: true
@@ -24,7 +28,8 @@ export default {
     }
   },
   components: {
-    CustomHeader
+    CustomHeader,
+    loading
   },
   name: 'App'
 }

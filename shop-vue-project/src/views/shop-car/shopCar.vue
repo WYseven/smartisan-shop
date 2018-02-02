@@ -8,7 +8,7 @@
         <!--没有购物提醒-->
         <div class="empty-label" :class="{hide:shopList.length}">
           <h3>您的购物车中还没有商品</h3>
-          <a class="link" href="javascript:;">现在选购</a>
+          <router-link to="/" class="link">现在选购</router-link>
         </div>
         <!--没有购物车-->
         <div v-show='shopList.length'>
@@ -96,6 +96,9 @@
         </div>
       </div>
     </div>
+    <Modal @ok="okRemove" v-model="show" >
+      <p class="confirm-msg">商品已达到最大可购买数量，无法继续添加</p>
+    </Modal>
   </div>
 </template>
 <script src="./shopCarJs.js"></script>

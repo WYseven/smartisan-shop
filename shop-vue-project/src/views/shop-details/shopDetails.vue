@@ -64,6 +64,9 @@
         </div>
       </div>
     </div>
+    <Modal v-model="show" >
+      <p class="confirm-msg">商品已达到最大可购买数量，无法继续添加</p>
+    </Modal>
   </div>
 </template>
 <style src="./shopDetailsStyle.css"></style>

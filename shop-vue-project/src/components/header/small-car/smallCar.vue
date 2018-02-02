@@ -5,7 +5,7 @@
     <span class="cart-empty-num cart-num">
       <i>{{$store.getters.totalCountAddPrice.count}}</i>
     </span>
-    <div class="nav-cart-wrapper" v-show='show'>
+    <div class="nav-cart-wrapper" :style="{display: show ? 'block' : 'none'}">
       <div class="nav-cart-list">
         <!--购物车为空提示-->
         <div class="empty" v-show='!smallCarList.length'>
@@ -62,16 +62,20 @@
   </li>
 </template>
 <script>
-  export default {
-    data(){
-      return {
-        show: false
-      }
-    },
-    
+  export default {    
     computed: {
       smallCarList(){
         return this.$store.state.smallCarList
+      },
+      show: {
+        get(){
+          return this.$store.state.addCarShowSmallCar
+        },
+        set (value) {
+           this.$store.commit('updatedShow', {
+            show: value
+          })
+        }
       }
     },
     methods: {
@@ -88,11 +92,12 @@
       }
     },
     watch: {
-      smallCarList () {
-        this.show = true;
+      '$store.state.addCarShowSmallCar' () {
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
-          this.show = false;
+          this.$store.commit('updatedShow', {
+            show: false
+          })
         }, 4000);
       }
     }

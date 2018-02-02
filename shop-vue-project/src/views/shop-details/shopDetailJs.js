@@ -7,6 +7,7 @@ export default {
   },
   data () {
     return {
+      show: false, // 控制弹框显示
       shopInfo: {
         shop_info: {}
       },
@@ -80,6 +81,7 @@ export default {
       let item = smallCarList.find(item => item.id === this.shopInfo.id)
       // 判断是否已经到最大购买数量
       if (item && item.count + this.count > this.shopInfo.shop_info.limit_num ) {
+        this.show = true;
         return;
       }
       // 给加入购物车的对象，添加上选中的标识，在购物车中使用
@@ -118,7 +120,7 @@ export default {
     // 获取到父级下所有商品的信息
     getShopDetail({ id }).then((res) => {
       this.shopInfo = res.data.data;
-      
+      this.$store.commit('updateLoading', { loading: false })
     })
   }
 }

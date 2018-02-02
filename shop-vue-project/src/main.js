@@ -8,6 +8,11 @@ import store from './store'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
 
+// 全局组件modal
+import Modal from '@/components/modal/modal'
+
+Vue.component('Modal', Modal)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

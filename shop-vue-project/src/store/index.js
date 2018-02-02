@@ -7,7 +7,9 @@ let smallCarList = JSON.parse(localStorage.getItem('miaov-shop')) || []
 export default new Vuex.Store({
   state: {
     smallCarList: smallCarList,
-    isCar: true
+    isCar: false,
+    loading: false,
+    addCarShowSmallCar: false  // 当添加到购物车，则需要展开小购物车
   },
   getters:{
     totalCountAddPrice(state){
@@ -23,6 +25,13 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    updateLoading(state, payload) {
+      state.loading = payload.loading;
+    },
+    // 控制小购物车显示隐藏
+    updatedShow(state, payload){
+      state.addCarShowSmallCar = payload.show;
+    },
     updatedSmallCarList(state,payload){ //{list:{}}
       let item = state.smallCarList.find(item => item.id === payload.list.id)
       let index = state.smallCarList.findIndex(item => item.id === payload.list.id)

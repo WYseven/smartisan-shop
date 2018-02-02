@@ -106,14 +106,20 @@ import { getShopInfoByIds } from '@/api/api_method'
         let item = smallCarList.find(item => item.id === this.currentShopInfo.id)
         // 判断是否已经到最大购买数量
         if(item && item.count >= this.currentShopInfo.shop_info.limit_num){
+          this.$emit('show',true)
           return;
         }
         // 给加入购物车的对象，添加上选中的标识，在购物车中使用
         if(!this.currentShopInfo.checked){
           this.currentShopInfo.checked = true;
         }
+        // 更新数据，为小购物车服务
         this.$store.commit('updatedSmallCarList', {
           list: this.currentShopInfo
+        })
+        // 让小购物车显示出来
+        this.$store.commit('updatedShow', {
+          show: true
         })
       }
     }
