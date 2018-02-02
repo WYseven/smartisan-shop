@@ -97,7 +97,7 @@
       </div>
     </div>
     <Modal @ok="okRemove" v-model="show" >
-      <p class="confirm-msg">商品已达到最大可购买数量，无法继续添加</p>
+      <p class="confirm-msg">您确认删除该商品吗？</p>
     </Modal>
   </div>
 </template>
