@@ -43,7 +43,7 @@ const router = new Router({
 
 router.beforeEach((to,from,next) => {
 
-  document.title = to.meta.title;
+  document.title = to.meta.title || '购物商城--st';
   next();
 })
 

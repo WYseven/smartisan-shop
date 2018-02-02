@@ -62,9 +62,7 @@ export default {
     getShopInfoMethod (option) {
       let id = option.custom_sku_id;
       if(id) {
-        getShopDetail({ id }).then((res) => {
-          this.shopInfo = res.data.data;
-        })
+        this.getDetail(id)
       }
     },
     minus () {
@@ -91,11 +89,23 @@ export default {
       this.$store.commit('updatedSmallCarList', {
         list: this.shopInfo
       })
+      // 让小购物车显示出来
+      this.$store.commit('updatedShow', {
+        show: true
+      })
+    },
+    // 封装通用的方法，获取指定id的商品信息
+    getDetail(id){
+      // 获取到父级下所有商品的信息
+      getShopDetail({ id }).then((res) => {
+        this.shopInfo = res.data.data;
+        this.$store.commit('updateLoading', { loading: false })
+      })
     }
   },
   computed: {
     shop_info () {
-      document.title = this.shopInfo.shop_info.title;
+      document.title = this.shopInfo.shop_info.title || '商品详情';
       return this.shopInfo.shop_info
     },
     spec_v2 () {  // 这一类商品下所有的信息
@@ -115,12 +125,15 @@ export default {
       return this.count >= this.shop_info.limit_num 
     }
   },
+  watch: {  
+    $route(){ // 当路径改变时，重新获取元素
+      let id = this.$route.params.id;
+      this.getDetail(id)
+    }
+  },
   created () {
     let id = this.$route.params.id;
     // 获取到父级下所有商品的信息
-    getShopDetail({ id }).then((res) => {
-      this.shopInfo = res.data.data;
-      this.$store.commit('updateLoading', { loading: false })
-    })
+    this.getDetail(id)
   }
 }

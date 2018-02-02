@@ -90,7 +90,6 @@ let navDate = [
           if(item){
             document.title = item.title;
           }
-          
         },
         immediate: true
       }

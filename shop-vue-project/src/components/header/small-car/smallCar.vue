@@ -20,12 +20,14 @@
                 <div class="cart-item js-cart-item cart-item-sell">
                   <div class="cart-item-inner">
                     <div class="item-thumb">
-                      <img :src="item.shop_info.ali_image">
+                      <router-link :to="{path:'/detail/'+item.id}">
+                        <img :src="item.shop_info.ali_image">
+                      </router-link>
                     </div>
                     <div class="item-desc">
                       <div class="cart-cell">
                         <h4>
-                          <a href="#/item/100027401">{{item.shop_info.title}}</a>
+                          <router-link :to="{path:'/detail/'+item.id}">{{item.shop_info.title}}</router-link>
                         </h4>
                         <p class="attrs">
                           <span v-for='option in item.shop_info.spec_json' :key="option.spec_id">

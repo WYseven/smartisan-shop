@@ -4,7 +4,7 @@
     
     <div class="main">
       <loading v-show="$store.state.loading"></loading>
-      <router-view  v-show="!$store.state.loading"/>
+      <router-view v-cloak  v-show="!$store.state.loading"/>
     </div>
   </div>
 </template>
@@ -38,6 +38,9 @@ export default {
 <style>
 .main {
   padding-top: 20px;
+}
+[v-cloak] {
+  display: none;
 }
 /* 
 .sort-option{
