@@ -21,7 +21,6 @@
     <div class="item-btns clearfix">
       <span class="item-gray-btn">
         <a href="javascript:;" @click="seeDetail" target="_blank">查看详情</a>
-        
       </span>
       <span 
         class="item-blue-btn" 

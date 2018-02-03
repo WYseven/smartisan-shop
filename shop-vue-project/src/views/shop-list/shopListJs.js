@@ -12,7 +12,6 @@ export default {
   watch: {
     $route: {
       handler() {
-        
         getShopList({ page: 1, id: this.$route.query.id }).then((res) => {
           this.list = res.data.data.list;
           this.$store.commit('updateLoading', { loading: false })

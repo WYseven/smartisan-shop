@@ -5,12 +5,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import { sync } from 'vuex-router-sync'
+
+const unsync = sync(store, router)
+
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
 
 // 全局组件modal
 import Modal from '@/components/modal/modal'
-
 Vue.component('Modal', Modal)
 
 Vue.config.productionTip = false
@@ -23,3 +26,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+//unsync();

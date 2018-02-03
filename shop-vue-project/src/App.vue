@@ -14,6 +14,9 @@ import CustomHeader from '@/components/header/header'
 import loading from '@/components/loading/loading'
 
 export default {
+  created () {
+    this.$store.dispatch('shopListAction')
+  },
   watch:{
     $route:{
       handler(){
@@ -24,7 +27,19 @@ export default {
       immediate: true
     },
     '$store.state.smallCarList'(){
-      localStorage.setItem('miaov-shop',JSON.stringify(this.$store.state.smallCarList))
+      let smallCarList = this.$store.state.smallCarList;
+      // 存入商品的信息到localStorage中
+      let info = smallCarList.reduce((obj,item) => {
+       
+        obj[item.id] =  {
+            checked: item.checked,
+            count:item.count,
+            id: item.id
+          }
+        return obj;
+          
+      },{})
+      localStorage.setItem('miaov-shop-info',JSON.stringify(info))
     }
   },
   components: {
@@ -42,45 +57,6 @@ export default {
 [v-cloak] {
   display: none;
 }
-/* 
-.sort-option{
-    border-top: 1px solid #D8D8D8;
-    color: #999;
-}
-.sort-option ul{
-    height: 60px;
-    line-height: 60px;
-}
-.sort-option li{
-    position: relative;
-    float: left;
-    padding-left: 42px;
-}
-.sort-option li:first-child{
-	padding-left: 9px;
-}
-.sort-option li:before{
-	content: ' ';
-    display: block;
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    width: 2px;
-    height: 2px;
-    margin-top: -1px;
-    background: #C7C7C7;
-}
-.sort-option li:first-child:before{
-	display: none;
-}
-.sort-option a{
-	display: block;
-    font-size: 12px;
-    color: #999;
-}
-.sort-option a.active, .sort-option a:hover{
-    color: #5683EA;
-} */
 .nav-global .nav-list .router-link-active {
   color: #fff;
 }

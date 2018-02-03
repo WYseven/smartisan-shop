@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { getShopInfoByIds } from '@/api/api_method'
 Vue.use(Vuex)
 
-let smallCarList = JSON.parse(localStorage.getItem('miaov-shop')) || []
+let info = JSON.parse(localStorage.getItem('miaov-shop-info')) || []
+
 export default new Vuex.Store({
   state: {
-    smallCarList: smallCarList,
+    smallCarList: [],
     isCar: false,
     loading: false,
     addCarShowSmallCar: false  // 当添加到购物车，则需要展开小购物车
@@ -45,6 +46,10 @@ export default new Vuex.Store({
         state.smallCarList.push(payload.list)
       }
     },
+    // 初次获取小购物车所有的数据
+    replaceSmallCarList(state, payload) {
+      state.smallCarList = payload.list;
+    },
     removeSmallCarListById(state,payload){ //{id}
       let index = state.smallCarList.findIndex(item => item.id === payload.id)
       if(index !== -1){
@@ -62,6 +67,20 @@ export default new Vuex.Store({
     },
     updateCar(state,payload){  // 如果是在购物车，则不显示
       state.isCar = payload.show;
+    }
+  },
+  actions: {
+    // 获取商品购物车数据
+    shopListAction ({commit,state}) {
+      let ids = Object.keys(info).join(',')
+      getShopInfoByIds({ ids: ids}).then((res) => {
+
+        let list = res.data.data.list
+        
+        list.forEach(item => item.count = info[item.id].count)
+        
+        commit('replaceSmallCarList', { list: list})
+      })
     }
   }
 })

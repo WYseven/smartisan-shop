@@ -4,14 +4,6 @@ const instance = Axios.create({
   baseURL: baseUrl
 })
 
-instance.interceptors.response.use(function (response) {
-  // 对响应数据做点什么
-  return response;
-}, function (error) {
-  // 对响应错误做点什么
-  return Promise.reject(error);
-});
-
 /**
  * 获取商品列表
  * @param {Object} [params={ page_size:20, page:1 }] 获取商品列表的参数
