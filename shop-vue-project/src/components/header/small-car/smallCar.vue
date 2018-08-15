@@ -3,7 +3,7 @@
     <a href="javascript:;">购物车</a>
     <!--根据class改变颜色-->
     <span class="cart-empty-num cart-num">
-      <i>{{$store.getters.totalCountAddPrice.count}}</i>
+      <i>{{totalCountAddPrice.count}}</i>
     </span>
     <div class="nav-cart-wrapper" :style="{display: show ? 'block' : 'none'}">
       <div class="nav-cart-list">
@@ -48,10 +48,10 @@
             </ul>
           </div>
           <div class="nav-cart-total">
-            <p>共 <strong class="ng-binding">{{$store.getters.totalCountAddPrice.count}}</strong> 件商品</p>
+            <p>共 <strong class="ng-binding">{{totalCountAddPrice.count}}</strong> 件商品</p>
             <h5>合计：<span class="price-icon">¥</span>
             <span class="price-num ng-binding" ng-bind="cartMenu.totalPrice">
-              {{$store.getters.totalCountAddPrice.price}}
+              {{totalCountAddPrice.price}}
             </span></h5>
             <h6>
             <!-- <router-link  class="nav-cart-btn" :to="{name:'car'}">去购物车</router-link> -->
@@ -64,11 +64,13 @@
   </li>
 </template>
 <script>
+  import {mapState,mapGetters} from 'vuex'
   export default {    
     computed: {
-      smallCarList(){
-        return this.$store.state.smallCarList
-      },
+      ...mapState({
+        smallCarList: 'smallCarList'
+      }),
+      ...mapGetters(['totalCountAddPrice']),
       show: {
         get(){
           return this.$store.state.addCarShowSmallCar

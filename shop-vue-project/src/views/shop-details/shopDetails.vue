@@ -6,9 +6,11 @@
       <!--右侧信息-->
       <div class="banner">
         <div class="sku-custom-title">
+          <!-- 价钱 -->
           <div class="params-price">
             <span><em>¥</em><i>{{shopInfo.price}}</i></span>
           </div>
+           <!-- 大标题和小标题 -->
           <div class="params-info">
             <h4>{{shop_info.title}}</h4>
             <h6>{{shop_info.sub_title}}</h6>
@@ -33,16 +35,7 @@
                 </span>
               </li>
             </ul>
-          </div><!-- 
-           <div class="sku-dynamic-params clear"  v-if="item.spec_id != 1" v-for="item in spec_v2" :key="item.spec_id">
-            <span class="params-name">{{item.spec_name}}</span>
-            <ul class="params-block">
-              <li :class="{cur: curClass(option.id)}" v-for="option in item.spec_values" :key="option.id">
-                  {{option.show_name}}
-              </li>
-            </ul>
-          </div> -->
-
+          </div>
           <div class="sku-dynamic-params clear">
             <div class="params-name">数量</div>
             <div class="params-detail clear">

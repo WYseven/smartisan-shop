@@ -1,8 +1,10 @@
 import Axios from 'axios'
 
 const instance = Axios.create({
-  baseURL: baseUrl
+  baseURL: `http://127.0.0.1:7001/api/v1`
 })
+
+
 
 /**
  * 获取商品列表
@@ -34,6 +36,16 @@ export function getShopInfoByIds(params = { ids: '', with_stock: true }) {
  */
 
 export function getShopDetail(params = { id: '' }) {
+  return instance.get('/shop_detail', { params: params })
+}
+
+/**
+ * 添加到购物车
+ * @param {Object} [params={ id:'' }] 获取商品列表的参数
+ * @param {Number} params{}.id 商品的id, 必填项
+ */
+
+export function addCar(params = { id: '' }) {
   return instance.get('/shop_detail', { params: params })
 }
 

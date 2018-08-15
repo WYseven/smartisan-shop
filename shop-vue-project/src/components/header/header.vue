@@ -18,6 +18,8 @@
           <li><a href="http://2017.miaov.com/bbs">社区</a></li>
           <li><a href="http://www.miaov.com/index.php/example/exampleList">学员作品</a></li>
           <li><router-link to="/">在线商城</router-link></a></li>
+          <li><router-link to="/login">登录</router-link></a></li>
+          <li><router-link to="/register">注册</router-link></a></li>
         </ul>
 
         <ul class="nav-list" style="float:right;">
@@ -37,7 +39,9 @@
               :class="{active: $route.query.id == item.query.id}" 
               :a="item.name"
               v-for="item in navDate" 
-              :key="item.query.id" :to="item" tag="li"
+              :key="item.query.id" 
+              :to="item" 
+              tag="li"
             >
               <a>{{item.title}}</a>
             </router-link>

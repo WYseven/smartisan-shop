@@ -25,19 +25,30 @@
               <div class="cart-top-items">
                 <div class="cart-items" v-for="item in shopList" :key="item.id">
                   <div class="items-choose">
-                    <span class="blue-checkbox-new" @click="toggle(item)" :class="{'checkbox-on': item.checked}"><a></a></span>
+                    <!--购物车的单选按钮-->
+                    <span class="blue-checkbox-new" 
+                      @click="toggle(item)" 
+                      :class="{'checkbox-on': item.checked}">
+                    </span>
                   </div>
                   <div class="items-thumb">
-                    
+                    <!-- 点击图片，跳转到详情页 -->
                     <router-link :to="'/detail/'+item.id">
                       <img :src="item.shop_info.ali_image">
                     </router-link>
                   </div>
                   <div class="name hide-row" >
                     <div class="name-table">
-                      <router-link :to="'/detail/'+item.id">{{item.shop_info.title}}</router-link>
+                      <!-- 点击导航，跳转到详情页 -->
+                      <router-link 
+                        :to="'/detail/'+item.id"
+                      >{{item.shop_info.title}}</router-link>
                       <ul class="attribute">
-                        <li v-for='option in  item.shop_info.spec_json' :key="option.spec_id">
+                        <!-- 生成规格 -->
+                        <li 
+                          v-for='option in item.shop_info.spec_json' 
+                          :key="option.spec_id"
+                        >
                           {{option.show_name}}
                         </li>
                       </ul>
@@ -83,7 +94,7 @@
             </div>
             <div class="shipping-total shipping-price">
               <h4 class="">
-                应付总额：<span>￥</span><i>{{$store.getters.totalCountAddPrice.price}}</i> 
+                应付总额：<span>￥</span><i>{{checkedCountAddPrice}}</i> 
               </h4>
               <h5 class="shipping-tips">
                 应付总额不含运费

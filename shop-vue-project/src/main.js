@@ -10,11 +10,13 @@ import { sync } from 'vuex-router-sync'
 const unsync = sync(store, router)
 
 import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
+Vue.use(VueLazyload,{
+  loading: require('@/assets/img/loading.gif')
+})
 
 // 全局组件modal
 import Modal from '@/components/modal/modal'
-Vue.component('Modal', Modal)
+Vue.component('Modal', Modal);
 
 Vue.config.productionTip = false
 

@@ -3,7 +3,7 @@ import Tab from './tab/tab'
 export default {
   name: 'detail',
   components: {
-    Tab
+    Tab  // 使用了左侧轮播图片
   },
   data () {
     return {
@@ -59,10 +59,18 @@ export default {
       
       return bl;
     },
+    // 切换商品更新
     getShopInfoMethod (option) {
       let id = option.custom_sku_id;
       if(id) {
-        this.getDetail(id)
+        this.getDetail(id);
+        // 更新地址栏
+        this.$router.push({
+          path:'',
+          params: {
+            id
+          }
+        })
       }
     },
     minus () {
@@ -99,7 +107,6 @@ export default {
       // 获取到父级下所有商品的信息
       getShopDetail({ id }).then((res) => {
         this.shopInfo = res.data.data;
-        this.$store.commit('updateLoading', { loading: false })
       })
     }
   },
@@ -126,14 +133,12 @@ export default {
     }
   },
   watch: {  
-    $route(){ // 当路径改变时，重新获取元素
-      let id = this.$route.params.id;
-      this.getDetail(id)
+    $route:{
+      handler(){ // 当路径改变时，重新获取元素
+        let id = this.$route.params.id;
+        this.getDetail(id)
+      },
+      immediate: true
     }
-  },
-  created () {
-    let id = this.$route.params.id;
-    // 获取到父级下所有商品的信息
-    this.getDetail(id)
   }
 }
